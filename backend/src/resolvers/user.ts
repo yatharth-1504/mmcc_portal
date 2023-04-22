@@ -14,9 +14,11 @@ class UserResolver {
   async login(@Arg("login") { roll, password }: LoginInput) {
     try {
       const user = await User.findOne({ where: { roll: roll } });
-      console.log("Here I am!");
       if (!user) throw new Error("Invalid Email");
-      const passwordIsValid = bcryptjs.compareSync(password, user.password);
+      const passwordIsValid =
+        process.env.NODE_ENV === "production"
+          ? bcryptjs.compareSync(password, user.password)
+          : password === user.password;
       if (!passwordIsValid) throw new Error("Invalid Credentials");
       let token = jwt.sign(user.id, process.env.JWT_SECRET!);
       return { token: token, status: true };
@@ -26,7 +28,7 @@ class UserResolver {
   }
 
   @Mutation(() => Boolean)
-  // @Authorized([UserRole.ADMIN])
+  @Authorized([UserRole.ADMIN])
   async addTestUsers() {
     try {
       if (process.env.NODE_ENV !== "production") {
