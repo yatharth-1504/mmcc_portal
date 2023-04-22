@@ -1,3 +1,4 @@
+import ComplaintResolver from "./complaint";
 import UserResolver from "./user";
 
-export default [UserResolver] as const;
+export default [UserResolver, ComplaintResolver] as const;
