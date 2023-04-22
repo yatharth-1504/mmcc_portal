@@ -1,3 +1,4 @@
+import Complaint from "./compliant";
 import User from "./user";
 
-export default [User];
+export default [User, Complaint];
