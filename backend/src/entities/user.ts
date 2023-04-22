@@ -1,5 +1,14 @@
-import { Field, ObjectType } from "type-graphql";
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Field, ObjectType, registerEnumType } from "type-graphql";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import Complaint from "./compliant";
+import { UserRole } from "../types/enums/user";
+registerEnumType(UserRole, { name: "UserRole" });
 
 @Entity("User")
 @ObjectType("User")
@@ -10,7 +19,7 @@ class User extends BaseEntity {
 
   @Column()
   @Field()
-  username: string;
+  name: string;
 
   @Column()
   password: string;
@@ -18,6 +27,14 @@ class User extends BaseEntity {
   @Column()
   @Field()
   roll: string;
+
+  @Column("enum", { enum: UserRole, default: UserRole.USER })
+  role: UserRole;
+
+  @OneToMany(() => Complaint, (complaint) => complaint.user, {
+    nullable: true,
+  })
+  complaints: Complaint[];
 }
 
 export default User;
