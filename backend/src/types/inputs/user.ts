@@ -1,6 +1,6 @@
 import { Field, InputType } from "type-graphql";
 
-@InputType("LoginInput")
+@InputType()
 class LoginInput {
   @Field()
   roll: string;
