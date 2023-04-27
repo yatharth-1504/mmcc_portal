@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import Complaint from "./compliant";
-import { UserRole } from "../types/enums/user";
+import { UserRole, Verticle } from "../types/enums/user";
 registerEnumType(UserRole, { name: "UserRole" });
 
 @Entity("User")
@@ -30,6 +30,9 @@ class User extends BaseEntity {
 
   @Column("enum", { enum: UserRole, default: UserRole.USER })
   role: UserRole;
+
+  @Column("enum", { nullable: true, enum: Verticle })
+  verticle: Verticle;
 
   @OneToMany(() => Complaint, (complaint) => complaint.user, {
     nullable: true,

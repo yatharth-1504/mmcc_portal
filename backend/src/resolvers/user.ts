@@ -3,9 +3,9 @@ import bcryptjs from "bcryptjs";
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import LoginOutput from "../types/objects/user";
 import MyContext from "../utils/context";
-import { LoginInput } from "../types/inputs/user";
+import { LoginInput, UpdateRoleInput } from "../types/inputs/user";
 import jwt from "jsonwebtoken";
-import { usersDevList } from "../utils";
+import { usersDevList, validateUpdateRole } from "../utils";
 import { UserRole } from "../types/enums/user";
 
 @Resolver(() => User)
@@ -55,6 +55,32 @@ class UserResolver {
   @Authorized()
   async getMe(@Ctx() { user }: MyContext) {
     return user;
+  }
+
+  @Mutation(() => User)
+  @Authorized([
+    UserRole.ADMIN,
+    UserRole.CORE,
+    UserRole.SUPER_CORD,
+    UserRole.HAS,
+  ])
+  async updateUserRole(
+    @Ctx() { user }: MyContext,
+    @Arg("updateRole") { roll, role, verticle }: UpdateRoleInput
+  ) {
+    const _user = await User.findOne({ where: { roll: roll } });
+    if (!_user) {
+      throw new Error("Invalid roll no");
+    }
+    if (verticle !== user.verticle) {
+      throw new Error("Invalid Verticle");
+    }
+    if (!validateUpdateRole(_user.role, user.role, role)) {
+      throw new Error("Invalid Action");
+    }
+    _user.role = role;
+    const userUpdated = await _user.save();
+    return userUpdated;
   }
 }
 
