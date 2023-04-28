@@ -1,0 +1,15 @@
+@import "../../index.scss";
+.Loading {
+  width: 80%;
+  margin: auto;
+  font-size: 15px;
+  padding: 10px;
+  color: $loading-color;
+}
+.Error {
+  width: 80%;
+  padding: 10px;
+  margin: auto;
+  font-size: 15px;
+  color: $error-color;
+}
