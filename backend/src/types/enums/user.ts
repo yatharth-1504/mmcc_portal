@@ -4,4 +4,10 @@ export enum UserRole {
   CORE = "CORE",
   CORD = "CORDINATOR",
   USER = "USER",
+  HAS = "HAS"
+}
+
+export enum Verticle {
+  MMCC = "MMCC",
+  CMGFS = "CMGFS"
 }

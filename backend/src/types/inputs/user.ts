@@ -1,4 +1,5 @@
 import { Field, InputType } from "type-graphql";
+import { UserRole, Verticle } from "../enums/user";
 
 @InputType()
 class LoginInput {
@@ -9,4 +10,16 @@ class LoginInput {
   password: string;
 }
 
-export { LoginInput };
+@InputType()
+class UpdateRoleInput {
+  @Field()
+  roll: string;
+  
+  @Field()
+  role: UserRole;
+
+  @Field({nullable: true})
+  verticle: Verticle;
+}
+
+export { LoginInput, UpdateRoleInput };
