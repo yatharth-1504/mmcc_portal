@@ -1,0 +1,39 @@
+// preview styles
+$box-width: 80%;
+$box-display: flex;
+$box-radius: 20px;
+$preview-box-color: rgb(237, 235, 230);
+// error and loading messages
+$loading-color: rgb(91, 82, 59);
+$error-color: #f4623a;
+// form styles
+$page-hieght: 100vh;
+$page-width: 100%;
+$page-display: flex;
+$align-items: center;
+$justify-content: center;
+$form-color: #984c37;
+$form-width: 32%;
+$form-text-align: center;
+$label-text-align: left;
+$heading-size: 20px;
+$bottom-margin: 30px;
+$label_input_select-display: block;
+$input_select_width: 100%;
+$input_select_padding: 6px 10px;
+$input_select_margin: 20px 0;
+$input_select_border: 1px solid #ddd;
+$input_select_box-sizing: border-box;
+$button-background: $form-color;
+$button-color: #ffffff;
+$button-border: 0;
+$button-padding: 8px;
+$button-border-radius: 8px;
+$button-cursor: pointer;
+// base styles
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  font-family: "Quicksand";
+  color: #333;
+}
