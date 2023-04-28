@@ -1,9 +1,23 @@
-import React from 'react'
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Complaint } from "./pages/Complaint/Complaint";
+import { Create } from "./pages/Complaint/Create";
+import { Login } from "./pages/Auth/Login";
+import "./index.scss";
 
 function App() {
   return (
-    <div>Yatharth, karle bhai, jaldi khatam karle isko</div>
+    <Router>
+      <body>
+        <div className="App">
+          <Routes>
+            <Route exact path="/create" Component={Create} />
+            <Route exact path="/login" Component={Login} />
+            <Route exact path="/complaints" Component={Complaint} />
+          </Routes>
+        </div>
+      </body>
+    </Router>
   );
 }
 
