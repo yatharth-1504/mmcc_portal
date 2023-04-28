@@ -16,7 +16,7 @@ export function NavBar({ buttons }) {
           </div>
         ))}
         <button>
-          <img className="img" src={add_img}></img>
+          <img className="img" src={add_img} alt="add-icon"></img>
           {"Add Compliant"}
         </button>
       </nav>
