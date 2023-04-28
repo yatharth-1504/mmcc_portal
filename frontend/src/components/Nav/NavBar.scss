@@ -1,0 +1,40 @@
+@import "../../index.scss";
+
+.Nav {
+  display: $box-display;
+  justify-content: space-between;
+  width: $box-width;
+  margin: auto;
+  margin-top: 15px;
+  border-radius: $box-radius;
+  background-color: $preview-box-color;
+  button {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 14px;
+    border: transparent;
+    border-radius: $box-radius;
+    cursor: pointer;
+    margin: 10px;
+    background-color: rgb(194, 188, 176);
+  }
+  button:hover {
+    opacity: 0.8;
+  }
+  .img {
+    border-radius: 15px;
+    height: 30px;
+    margin-right: 5px;
+  }
+  .filters_sort {
+    font-size: 13px;
+    margin: 10px;
+    .dropdown {
+      padding: 5px;
+      border: transparent;
+      margin: 10px;
+      border-radius: $box-radius;
+    }
+  }
+}
