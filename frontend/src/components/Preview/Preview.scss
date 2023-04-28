@@ -1,0 +1,28 @@
+@import "../../index.scss";
+.Preview {
+  padding-left: 20px;
+  padding-right: 20px;
+  width: $box-width;
+  margin: auto;
+  .Complaint {
+    display: $box-display;
+    padding: 10px 16px;
+    margin: 20px 0;
+    background-color: $preview-box-color;
+    font-size: 12px;
+    border-radius: $box-radius;
+    .Complaint-Img {
+      padding: 20px;
+      .Image {
+        border: 2px rgb(77, 77, 76);
+        width: 15vw;
+        border-radius: $box-radius;
+        object-fit: contain;
+      }
+    }
+    .Complaint-Text {
+      padding: 20px;
+      border-radius: $box-radius;
+    }
+  }
+}
