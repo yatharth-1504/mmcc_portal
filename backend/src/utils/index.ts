@@ -1,5 +1,5 @@
-import { UserRole } from "src/types/enums/user";
-import { _admin, _core, _has, _super_cord, admin, core, has, super_cord } from "src/types/objects/permissions";
+import { UserRole } from "../types/enums/user";
+import { _admin, _core, _has, _super_cord, admin, core, has, super_cord } from "../types/objects/permissions";
 
 export const emailExpresion =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

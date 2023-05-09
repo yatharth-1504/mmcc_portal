@@ -25,6 +25,7 @@ class Complaint extends BaseEntity {
   user: User;
 
   @Column("enum", { enum: ComplaintStatus, default: ComplaintStatus.POSTED })
+  @Field()
   status: ComplaintStatus;
 }
 

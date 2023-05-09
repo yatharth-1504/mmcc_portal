@@ -6,7 +6,7 @@ import MyContext from "../utils/context";
 import { LoginInput, UpdateRoleInput } from "../types/inputs/user";
 import jwt from "jsonwebtoken";
 import { usersDevList, validateUpdateRole } from "../utils";
-import { UserRole } from "../types/enums/user";
+import {UserRole } from "../types/enums/user"
 
 @Resolver(() => User)
 class UserResolver {
