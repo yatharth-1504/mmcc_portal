@@ -1,14 +1,16 @@
-import { Field, ObjectType, registerEnumType } from "type-graphql";
+import {Field, ObjectType, registerEnumType} from "type-graphql";
 import {
   BaseEntity,
   Column,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import Complaint from "./compliant";
-import { UserRole, Verticle } from "../types/enums/user";
-registerEnumType(UserRole, { name: "UserRole" });
+import Complaint from "./complaint";
+import {UserRole, Verticle} from "../types/enums/user";
+import Permission from "./permission";
+registerEnumType(UserRole, {name: "UserRole"});
 
 @Entity("User")
 @ObjectType("User")
@@ -28,16 +30,19 @@ class User extends BaseEntity {
   @Field()
   roll: string;
 
-  @Column("enum", { enum: UserRole, default: UserRole.USER })
+  @Column("enum", {enum: UserRole, default: UserRole.USER})
   role: UserRole;
 
-  @Column("enum", { nullable: true, enum: Verticle })
+  @Column("enum", {nullable: true, enum: Verticle})
   verticle: Verticle;
 
   @OneToMany(() => Complaint, (complaint) => complaint.user, {
     nullable: true,
   })
   complaints: Complaint[];
+
+  @ManyToOne(() => Permission, permission => permission.users)
+  permission: Permission;
 }
 
 export default User;
