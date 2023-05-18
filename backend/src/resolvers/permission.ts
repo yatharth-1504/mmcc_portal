@@ -33,13 +33,13 @@ class PermissionResolver {
       if (!!permission) {
         permission.users.push(_user);
         const permissionUpdated = await permission.save();
-        return permissionUpdated;
+        return !!permissionUpdated;
       }
       const permissionCreated = await Permission.create({
         ...permissionInput,
         users: [_user],
       }).save();
-      return permissionCreated;
+      return !!permissionCreated;
     } catch (e) {
       throw new Error(`error : ${e}`);
     }
