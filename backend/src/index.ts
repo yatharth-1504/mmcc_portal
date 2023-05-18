@@ -24,7 +24,10 @@ const main = async () => {
           token.split("Bearer ")[1],
           process.env.JWT_SECRET!
         );
-        user = await User.findOne({ id: decoded });
+        user = await User.findOne({
+          where: { id: decoded },
+          relations: ["permission"],
+        });
       } catch (e) {
         console.log(`message ${e}`);
       }
