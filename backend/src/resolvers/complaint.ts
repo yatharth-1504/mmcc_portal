@@ -87,16 +87,16 @@ class ComplaintResolver {
     @Arg("assignComplaint") assignComplaintInput: AssignComplaintInput
   ) {
     try {
-      const _user = await User.findOne({
+      const _user = await User.findOneOrFail({
         where: { roll: assignComplaintInput.roll },
       });
-      if (!_user) throw new Error("Invalid Roll no.");
-      if (!user.permission.assignComplaintsTo.includes(_user.role))
+      if (!user.permission.assignComplaintsTo.includes(_user!.role))
         throw new Error("UnAuthorised");
-      const complaint = await Complaint.findOne({
+      const complaint = await Complaint.findOneOrFail({
         where: { id: assignComplaintInput.complaintId },
       });
-      if (!complaint) throw new Error("Invalid Complaint Id");
+      if (_user!.verticle !== complaint.verticle)
+        throw new Error("Invalid Vertical");
       complaint.status = ComplaintStatus.ASSIGNED;
       complaint.assignedTo = _user;
       const complaintUpdated = await complaint.save();
@@ -119,11 +119,10 @@ class ComplaintResolver {
     @Arg("resolveComplaint") resolveComplaintInput: ResolveComplaintInput
   ) {
     try {
-      const complaint = await Complaint.findOne(
+      const complaint = await Complaint.findOneOrFail(
         resolveComplaintInput.complaintId,
         { relations: ["assignedTo"] }
       );
-      if (!complaint) throw new Error("Invalid Complaint Id");
       if (user.id !== complaint.assignedTo.id) throw new Error("UnAuthorised");
       complaint.status = resolveComplaintInput.status;
       complaint.proof = resolveComplaintInput.proof;

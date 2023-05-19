@@ -17,8 +17,7 @@ class UserResolver {
   @Mutation(() => LoginOutput)
   async login(@Arg("login") { roll, password }: LoginInput) {
     try {
-      const user = await User.findOne({ where: { roll: roll } });
-      if (!user) throw new Error("Invalid Email");
+      const user = await User.findOneOrFail({ where: { roll: roll } });
       const passwordIsValid =
         process.env.NODE_ENV === "production"
           ? bcryptjs.compareSync(password, user.password)

@@ -14,8 +14,7 @@ class PermissionResolver {
     @Arg("roll") roll: string
   ) {
     try {
-      const _user = await User.findOne({ where: { roll } });
-      if (!_user) throw new Error("Invalid Roll no.");
+      const _user = await User.findOneOrFail({ where: { roll } });
       const permission = await Permission.findOne({
         where: {
           updateRoleOf: Raw((alias) => `${alias} = :updateRoleOf`, {
