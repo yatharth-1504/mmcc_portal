@@ -21,10 +21,15 @@ class ComplaintResolver {
     @Ctx() { user }: MyContext
   ) {
     try {
+      let imageUrls = "";
+      if (complaintInput.images) {
+        imageUrls = complaintInput.images.join(" AND ");
+      }
       const complaintCreated = await Complaint.create({
         description: complaintInput.description,
         status: ComplaintStatus.POSTED,
         verticle: complaintInput.verticle,
+        images: imageUrls === "" ? null : imageUrls,
         user,
       }).save();
       return complaintCreated;

@@ -9,7 +9,9 @@ class CreateComplaintInput {
 
   @Field()
   verticle: Verticle;
-  // TODO: Add more Fields Latter
+
+  @Field(() => [String], { nullable: true })
+  images: string[];
 }
 
 @InputType()

@@ -46,9 +46,9 @@ class Complaint extends BaseEntity {
   @Field()
   status: ComplaintStatus;
 
-  @Column({ nullable: true })
-  @Field({ nullable: true })
-  images: string;
+  @Column({ type: "text", nullable: true })
+  @Field(() => String, { nullable: true })
+  images: string | null;
 
   @Column({ nullable: true })
   @Field({ nullable: true })
