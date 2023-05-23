@@ -26,6 +26,10 @@ class Complaint extends BaseEntity {
   @Field()
   description: string;
 
+  @Column()
+  @Field()
+  title: string;
+
   @Column("enum", { enum: Verticle })
   @Field()
   verticle: Verticle;
