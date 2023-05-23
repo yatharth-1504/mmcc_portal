@@ -23,11 +23,11 @@ class ComplaintResolver {
   }
 }
 
-@Resolver()
-class AddPermission {
-  @Authorized()
-  @Mutation()
-  async addPermission(@Ctx() { user }: MyContext) {}
-}
+// @Resolver()
+// class AddPermission {
+//   @Authorized()
+//   @Mutation()
+//   async addPermission(@Ctx() { user }: MyContext) {}
+// }
 
 export default ComplaintResolver;

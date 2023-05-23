@@ -8,15 +8,13 @@ import "./index.scss";
 function App() {
   return (
     <Router>
-      <body>
         <div className="App">
           <Routes>
-            <Route exact path="/create" Component={Create} />
-            <Route exact path="/login" Component={Login} />
-            <Route exact path="/complaints" Component={Complaint} />
+            <Route path="/" element={<Login/>} />
+            <Route path="/create" element={<Create/>} />
+            <Route path="/complaints" element={<Complaint/>} />
           </Routes>
         </div>
-      </body>
     </Router>
   );
 }
