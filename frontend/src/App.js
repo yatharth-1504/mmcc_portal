@@ -8,7 +8,6 @@ import "./index.scss";
 function App() {
   return (
     <Router>
-      <body>
         <div className="App">
           <Routes>
             <Route exact path="/create" Component={Create} />
@@ -16,7 +15,6 @@ function App() {
             <Route exact path="/complaints" Component={Complaint} />
           </Routes>
         </div>
-      </body>
     </Router>
   );
 }

@@ -4,20 +4,35 @@ import { NavBar } from "../../components/Nav/NavBar";
 import "./Complaint.scss";
 
 export function Complaint() {
-  const buttons = [
-    {
-      name: "Filters",
-      conditions: ["All Complaints", "CMFGS", "MMCC"],
-    },
-    {
-      name: "Sort By",
-      conditions: ["Date(newest first)", "Date(oldest first)"],
-    },
-  ];
-
-  const { complaints, isPending, errors } = useFetch(
+  let { complaints, isPending, errors } = useFetch(
     "http://localhost:3001/complaints"
   );
+
+  const useFilters = () => {
+    console.log("Filtering");
+    ({ complaints, isPending, errors } = useFetch(
+      "http://localhost:3001/complaints"
+    ));
+  };
+
+  const useSort = () => {
+    console.log("Sorting");
+  };
+
+  const buttons = [
+    {
+      id: 1,
+      name: "Filters",
+      conditions: ["All Complaints", "CMFGS", "MMCC"],
+      method: useFilters,
+    },
+    {
+      id: 2,
+      name: "Sort By",
+      conditions: ["Date(newest first)", "Date(oldest first)"],
+      method: useSort,
+    },
+  ];
 
   return (
     <div className="Complaints">
