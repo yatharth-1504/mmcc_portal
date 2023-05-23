@@ -42,9 +42,7 @@ const main = async () => {
 
 createConnection({
   type: "postgres",
-  // url: process.env.DATABASE_URL,
-  username: "postgres",
-  password: "[)t!Ud$?V2c",
+  url: process.env.DATABASE_URL,
   host: "localhost",
   database: "mmcc_db",
   port: 8000,
