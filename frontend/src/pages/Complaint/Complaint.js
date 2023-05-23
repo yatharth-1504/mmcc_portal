@@ -24,13 +24,13 @@ export function Complaint() {
       id: 1,
       name: "Filters",
       conditions: ["All Complaints", "CMFGS", "MMCC"],
-      method: useFilters,
+      method: () => useFilters,
     },
     {
       id: 2,
       name: "Sort By",
       conditions: ["Date(newest first)", "Date(oldest first)"],
-      method: useSort,
+      method: () => useSort,
     },
   ];
 
