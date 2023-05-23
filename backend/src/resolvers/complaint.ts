@@ -26,6 +26,7 @@ class ComplaintResolver {
         imageUrls = complaintInput.images.join(" AND ");
       }
       const complaintCreated = await Complaint.create({
+        title: complaintInput.title,
         description: complaintInput.description,
         status: ComplaintStatus.POSTED,
         verticle: complaintInput.verticle,

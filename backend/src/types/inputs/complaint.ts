@@ -12,6 +12,9 @@ class CreateComplaintInput {
 
   @Field(() => [String], { nullable: true })
   images: string[];
+
+  @Field()
+  title: string;
 }
 
 @InputType()
