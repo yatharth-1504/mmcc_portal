@@ -1,10 +1,11 @@
-import { UserRole } from "../types/enums/user";
-import { Field, ObjectType } from "type-graphql";
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {UserRole} from "../types/enums/user";
+import {Field, ObjectType} from "type-graphql";
+import {BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import User from "./user";
 
 @Entity("Permission")
 @ObjectType("Permission")
-export class Permission extends BaseEntity {
+class Permission extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   @Field()
   id: string;
@@ -35,4 +36,9 @@ export class Permission extends BaseEntity {
   })
   @Field(() => [UserRole])
   assignComplaintsTo: UserRole[];
+
+  @OneToMany(() => User, user => user.permission, {nullable: true})
+  users: User[]
 }
+
+export default Permission;

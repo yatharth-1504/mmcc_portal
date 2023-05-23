@@ -1,4 +1,4 @@
-export enum Vendors {
+export enum Vendor {
   USHA = "USHA",
   WAAH_HYDERABADI = "WAAH_HYDERABADI",
   ANANDA = "ANANDA",
@@ -11,7 +11,7 @@ export enum Vendors {
   MOOSHA = "MOOSHA",
 }
 
-export enum Messes {
+export enum Mess {
   SRR = "SRR",
   SGR = "SGR",
   NEELKESH = "NEELKESH",

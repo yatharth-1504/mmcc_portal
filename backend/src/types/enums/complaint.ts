@@ -1,5 +1,11 @@
 export enum ComplaintStatus {
   POSTED = "POSTED",
-  APPROVED = "APPROVED",
+  ASSIGNED = "ASSIGNED",
+  RESOLVED = "RESOLVED",
   REJECTED = "REJECTED",
+}
+
+export enum Verticle {
+  MMCC = "MMCC",
+  CMGFS = "CMGFS",
 }

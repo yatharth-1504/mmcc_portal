@@ -9,14 +9,13 @@ export function NavBar({ buttons }) {
     <div>
       <nav className="Nav">
         {buttons.map((button) => (
-          <div className="filters_sort">
+          <div className="filters_sort" key={button.id}>
             {button.name + ":"}
-            <button className="dropbtn">{button.conditions[0]}</button>
-            <div className="dropdown-content">
-              {button.conditions.map((option) => (
-                <div className="dropdown-elements">{option}</div>
+            <select className="dropdown" onChange={(event) => button.method()}>
+              {button.conditions.map((c, id) => (
+                <option key={id}>{c}</option>
               ))}
-            </div>
+            </select>
           </div>
         ))}
         <button onClick={()=>navigate('/create')}>

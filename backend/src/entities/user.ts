@@ -3,11 +3,13 @@ import {
   BaseEntity,
   Column,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import Complaint from "./compliant";
+import Complaint from "./complaint";
 import { UserRole, Verticle } from "../types/enums/user";
+import Permission from "./permission";
 registerEnumType(UserRole, { name: "UserRole" });
 
 @Entity("User")
@@ -38,6 +40,14 @@ class User extends BaseEntity {
     nullable: true,
   })
   complaints: Complaint[];
+
+  @OneToMany(() => Complaint, (complaintAssigned) => complaintAssigned.assignedTo, {
+    nullable: true,
+  })
+  complaintsAssigned: Complaint[];
+
+  @ManyToOne(() => Permission, (permission) => permission.users)
+  permission: Permission;
 }
 
 export default User;
