@@ -17,6 +17,7 @@ export function Preview({ complaints }) {
             <p>{complaint.description}</p>
             {/* <p>Raised By: {complaint.user.id}</p> */}
             <p>Time: {complaint.createdAt}</p>
+            <h3>Status: {complaint.status}</h3>
           </div>
         </div>
       ))}
