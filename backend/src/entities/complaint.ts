@@ -39,6 +39,7 @@ class Complaint extends BaseEntity {
   createdAt: Date;
 
   @ManyToOne(() => User, (user) => user.complaints, { nullable: true })
+  @Field(() => User, { nullable: true })
   user: User;
 
   @ManyToOne(() => User, (assignedTo) => assignedTo.complaintsAssigned, {
