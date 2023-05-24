@@ -5,9 +5,6 @@ import { UserRole, Verticle } from "../enums/user";
 class LoginInput {
   @Field()
   roll: string;
-
-  @Field()
-  password: string;
 }
 
 @InputType()

@@ -1,5 +1,4 @@
 import User from "../entities/user";
-import bcryptjs from "bcryptjs";
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import LoginOutput from "../types/objects/user";
 import MyContext from "../utils/context";
@@ -15,14 +14,10 @@ import { UserRole } from "../types/enums/user";
 @Resolver(() => User)
 class UserResolver {
   @Mutation(() => LoginOutput)
-  async login(@Arg("login") { roll, password }: LoginInput) {
+  async login(@Arg("login") { roll }: LoginInput) {
     try {
+      console.log("here");
       const user = await User.findOneOrFail({ where: { roll: roll } });
-      const passwordIsValid =
-        process.env.NODE_ENV === "production"
-          ? bcryptjs.compareSync(password, user.password)
-          : password === user.password;
-      if (!passwordIsValid) throw new Error("Invalid Credentials");
       let token = jwt.sign(user.id, process.env.JWT_SECRET!);
       return { token: token, status: true };
     } catch (e) {
