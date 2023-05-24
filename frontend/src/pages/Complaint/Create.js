@@ -1,7 +1,7 @@
 import "./Create.scss";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useCreateComplaint } from "../../hooks/create";
+import { useCreateComplaint } from "../../hooks/post";
 
 export function Create() {
   const [title, setTitle] = useState("");

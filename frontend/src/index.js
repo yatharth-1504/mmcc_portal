@@ -5,7 +5,7 @@ import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const client = new ApolloClient({
-  uri: "http://localhost:8000/graphql",
+  uri: "http://localhost:8000/",
   cache: new InMemoryCache(),
 });
 

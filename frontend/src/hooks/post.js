@@ -1,4 +1,4 @@
-// all create functionaities here
+// Create complaint, login
 import { useMutation, gql } from "@apollo/client";
 
 const ADD_COMPLAINT_MUTATION = gql`
@@ -13,4 +13,19 @@ const ADD_COMPLAINT_MUTATION = gql`
 export const useCreateComplaint = ({ variables }) => {
   let addComplaint;
   return ([addComplaint] = useMutation(ADD_COMPLAINT_MUTATION, { variables }));
+};
+
+// Login
+const LOGIN_MUTATION = gql`
+  mutation Mutation($login: LoginInput!) {
+    login(login: $login) {
+      token
+      status
+    }
+  }
+`;
+
+export const useLogin = ({ variables }) => {
+  let login;
+  return ([login] = useMutation(LOGIN_MUTATION, { variables }));
 };

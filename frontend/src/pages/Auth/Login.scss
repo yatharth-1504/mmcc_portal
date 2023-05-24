@@ -7,35 +7,10 @@
   justify-content: $justify-content;
   align-items: $align-items;
   flex-direction: column;
-  .Login-Form {
-    width: $form-width;
-    text-align: $form-text-align;
+  h2 {
+    font-size: $heading-size;
+    color: $form-color;
+    margin-bottom: $bottom-margin;
     padding-bottom: $bottom-padding;
-    label {
-      text-align: $label-text-align;
-      display: $label_input_select-display;
-    }
-    h2 {
-      font-size: $heading-size;
-      color: $form-color;
-      margin-bottom: $bottom-margin;
-    }
-  }
-  input,
-  select {
-    width: $input_select_width;
-    padding: $input_select_padding;
-    margin: $input-select_margin;
-    border: $input_select_border;
-    box-sizing: $input_select_box_sizing;
-    display: $label_input_select-display;
-  }
-  button {
-    background: $form-color;
-    color: $button-color;
-    border: $button-border;
-    padding: $button-padding;
-    border-radius: $button-border-radius;
-    cursor: $button-cursor;
   }
 }

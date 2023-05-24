@@ -1,47 +1,36 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import "./Login.scss";
+import { useLogin } from "../../hooks/post";
+import jwtDecode from "jwt-decode";
 import { GoogleLogin } from "@react-oauth/google";
+import { useState } from "react";
 
 export function Login() {
-  const [roll, setRoll] = useState("");
-  const [password, setPassword] = useState("");
+  const [roll, setRoll] = useState();
 
   const navigate = useNavigate();
+  const [login] = useLogin({
+    variables: {
+      login: {
+        roll: roll,
+      },
+    },
+  });
 
-  const onLogin = () => {
-    navigate("complaints");
+  const onLogin = async (email) => {
+    setRoll(email);
+    const loginOutput = await login();
+    console.log(loginOutput);
+    navigate("/complaints");
   };
 
   return (
     <div className="Login-Page">
-      <form className="Login-Form" onSubmit={onLogin}>
-        <h2>Login With your SMAIL</h2>
-        <label htmlFor="roll">Smail:</label>
-        <input
-          id="roll"
-          type="text"
-          required
-          value={roll}
-          onChange={(e) => {
-            setRoll(e.target.value);
-          }}
-        />
-        <label htmlFor="password">Password:</label>
-        <input
-          id="password"
-          type="password"
-          required
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-        <button type="submit">Login</button>
-      </form>
+      <h2>Login With your SMAIL :)</h2>
       <GoogleLogin
         onSuccess={(credentialResponse) => {
-          console.log(credentialResponse);
+          const USER_CREDENTIALS = jwtDecode(credentialResponse.credential);
+          onLogin(USER_CREDENTIALS.email);
         }}
         onError={() => {
           console.log("Login Failed");

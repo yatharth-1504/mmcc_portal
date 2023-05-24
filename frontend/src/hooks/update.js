@@ -1,1 +1,1 @@
-// all update functions here
+// Update roll, update status
