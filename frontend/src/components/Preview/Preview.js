@@ -8,15 +8,15 @@ export function Preview({ complaints }) {
           <div className="Complaint-Img">
             <img
               className="Image"
-              src={complaint.image}
+              src={complaint.images}
               alt={complaint.title}
             />
           </div>
           <div className="Complaint-Text">
             <h2>{complaint.title}</h2>
             <p>{complaint.description}</p>
-            <p>Raised By: {complaint.raisedBy}</p>
-            <p>Time: {complaint.time}</p>
+            {/* <p>Raised By: {complaint.user.id}</p> */}
+            <p>Time: {complaint.createdAt}</p>
           </div>
         </div>
       ))}

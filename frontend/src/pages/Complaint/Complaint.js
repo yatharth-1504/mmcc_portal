@@ -1,29 +1,28 @@
 import { Preview } from "../../components/Preview/Preview";
 import { useFetch } from "../../hooks/fetch";
 import { NavBar } from "../../components/Nav/NavBar";
+import { useState } from "react";
 import "./Complaint.scss";
 
 export function Complaint() {
-  let { complaints, isPending, errors } = useFetch(
-    "http://localhost:3001/complaints"
-  );
+  const [filter, setFilter] = useState("All Complaints");
+  const [sort, setSort] = useState("Date(newest first)");
 
-  const useFilters = () => {
-    console.log("Filtering");
-    ({ complaints, isPending, errors } = useFetch(
-      "http://localhost:3001/complaints"
-    ));
+  const { complaints, isPending, errors } = useFetch(filter, sort);
+
+  const useFilters = (value) => {
+    setFilter(value);
   };
 
   const useSort = () => {
-    console.log("Sorting");
+    setSort(sort);
   };
 
   const buttons = [
     {
       id: 1,
       name: "Filters",
-      conditions: ["All Complaints", "CMFGS", "MMCC"],
+      conditions: ["All Complaints", "CMGFS", "MMCC"],
       method: useFilters,
     },
     {
@@ -39,7 +38,9 @@ export function Complaint() {
       <NavBar buttons={buttons} />
       {isPending && <div className="Loading">Loading ...</div>}
       {errors && (
-        <div className="Error">Errors in fetching the resource... :({errors}</div>
+        <div className="Error">
+          Errors in fetching the resource... :({errors}
+        </div>
       )}
       {!!complaints && <Preview complaints={complaints} />}
     </div>
