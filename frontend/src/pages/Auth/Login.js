@@ -1,23 +1,41 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "./Login.scss";
 
 export function Login() {
+  const [roll, setRoll] = useState("");
+  const [password, setPassword] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const onLogin = () => {
-    navigate('complaints')
-    console.log("Logging in")
-  }
+    navigate("complaints");
+  };
 
   return (
     <div className="Login-Page">
       <form className="Login-Form" onSubmit={onLogin}>
-        <h2>Login With your LDAP</h2>
-        <label for="roll_no">Roll no.:</label>
-        <input id="roll_no" type="text" required />
-        <label for="password">Password:</label>
-        <input id="password" type="password" required />
+        <h2>Login With your SMAIL</h2>
+        <label htmlFor="roll">Smail:</label>
+        <input
+          id="roll"
+          type="text"
+          required
+          value={roll}
+          onChange={(e) => {
+            setRoll(e.target.value);
+          }}
+        />
+        <label htmlFor="password">Password:</label>
+        <input
+          id="password"
+          type="password"
+          required
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+        />
         <button type="submit">Login</button>
       </form>
     </div>
