@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./Login.scss";
+import { GoogleLogin } from "@react-oauth/google";
 
 export function Login() {
   const [roll, setRoll] = useState("");
@@ -38,6 +39,15 @@ export function Login() {
         />
         <button type="submit">Login</button>
       </form>
+      <GoogleLogin
+        onSuccess={(credentialResponse) => {
+          console.log(credentialResponse);
+        }}
+        onError={() => {
+          console.log("Login Failed");
+        }}
+        useOneTap
+      />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const client = new ApolloClient({
   uri: "http://localhost:8000/graphql",
@@ -11,9 +12,11 @@ const client = new ApolloClient({
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
+    <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
+    </GoogleOAuthProvider>
   </React.StrictMode>
 );
 

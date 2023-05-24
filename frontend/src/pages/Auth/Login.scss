@@ -6,9 +6,11 @@
   display: $page-display;
   justify-content: $justify-content;
   align-items: $align-items;
+  flex-direction: column;
   .Login-Form {
     width: $form-width;
     text-align: $form-text-align;
+    padding-bottom: $bottom-padding;
     label {
       text-align: $label-text-align;
       display: $label_input_select-display;
