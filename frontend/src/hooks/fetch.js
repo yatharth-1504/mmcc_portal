@@ -31,8 +31,6 @@ export function useFetch(filter, sort) {
   const [isPending, setIsPending] = useState(true);
   const [errors, setErrors] = useState(false);
 
-  console.log(filter, sort);
-
   if (filter === "MMCC") {
     filteringConditions.verticle = "MMCC";
   }
