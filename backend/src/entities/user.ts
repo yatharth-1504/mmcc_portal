@@ -24,9 +24,6 @@ class User extends BaseEntity {
   name: string;
 
   @Column()
-  password: string;
-
-  @Column()
   @Field()
   roll: string;
 
@@ -41,12 +38,19 @@ class User extends BaseEntity {
   })
   complaints: Complaint[];
 
-  @OneToMany(() => Complaint, (complaintAssigned) => complaintAssigned.assignedTo, {
-    nullable: true,
-  })
+  @OneToMany(
+    () => Complaint,
+    (complaintAssigned) => complaintAssigned.assignedTo,
+    {
+      nullable: true,
+    }
+  )
   complaintsAssigned: Complaint[];
 
-  @ManyToOne(() => Permission, (permission) => permission.users)
+  
+  @ManyToOne(() => Permission, (permission) => permission.users, {
+    nullable: true,
+  })
   permission: Permission;
 }
 

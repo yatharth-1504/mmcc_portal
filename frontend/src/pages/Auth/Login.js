@@ -7,21 +7,21 @@ import { useState } from "react";
 
 export function Login() {
   const [roll, setRoll] = useState();
+  const [name, setName] = useState();
 
   const navigate = useNavigate();
   const [login] = useLogin({
     variables: {
       login: {
         roll: roll,
+        name: name,
       },
     },
   });
 
-  const onLogin = async (email) => {
-    setRoll(email);
+  const onLogin = async () => {
     const loginOutput = await login();
-    console.log(loginOutput);
-    navigate("/complaints");
+    navigate("/complaints", { state: { token: loginOutput.data.login.token } });
   };
 
   return (
@@ -30,7 +30,9 @@ export function Login() {
       <GoogleLogin
         onSuccess={(credentialResponse) => {
           const USER_CREDENTIALS = jwtDecode(credentialResponse.credential);
-          onLogin(USER_CREDENTIALS.email);
+          setRoll(USER_CREDENTIALS.email);
+          setName(USER_CREDENTIALS.name);
+          onLogin();
         }}
         onError={() => {
           console.log("Login Failed");

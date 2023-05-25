@@ -14,11 +14,17 @@ import { UserRole } from "../types/enums/user";
 @Resolver(() => User)
 class UserResolver {
   @Mutation(() => LoginOutput)
-  async login(@Arg("login") { roll }: LoginInput) {
+  async login(@Arg("login") { roll, name }: LoginInput) {
     try {
-      console.log("here");
-      const user = await User.findOneOrFail({ where: { roll: roll } });
-      let token = jwt.sign(user.id, process.env.JWT_SECRET!);
+      const user = await User.findOne({ where: { roll: roll } });
+      let newUser;
+      if (!user) {
+        newUser = await User.create({ roll, name }).save();
+      }
+      let token = jwt.sign(
+        newUser ? newUser.id : user!.id,
+        process.env.JWT_SECRET!
+      );
       return { token: token, status: true };
     } catch (e) {
       throw new Error(`error : ${e}`);
@@ -35,7 +41,6 @@ class UserResolver {
             async (_user) =>
               await User.create({
                 roll: _user.roll,
-                password: _user.pass,
                 name: _user.name,
                 role: UserRole.ADMIN,
               }).save()

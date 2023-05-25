@@ -17,7 +17,7 @@ export const useCreateComplaint = ({ variables }) => {
 
 // Login
 const LOGIN_MUTATION = gql`
-  mutation Mutation($login: LoginInput!) {
+  mutation Login($login: LoginInput!) {
     login(login: $login) {
       token
       status

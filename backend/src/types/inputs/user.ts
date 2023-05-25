@@ -5,17 +5,20 @@ import { UserRole, Verticle } from "../enums/user";
 class LoginInput {
   @Field()
   roll: string;
+
+  @Field({ nullable: true })
+  name: string;
 }
 
 @InputType()
 class UpdateRoleInput {
   @Field()
   roll: string;
-  
+
   @Field()
   role: UserRole;
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   verticle: Verticle;
 }
 

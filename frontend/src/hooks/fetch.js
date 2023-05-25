@@ -26,7 +26,7 @@ const _COMPLAINTS_QUERY = `query GetComplaints($sortConditions: SortConditions!,
 
 const url = "http://localhost:8000/graphql";
 
-export function useFetch(filter, sort) {
+export function useFetch(filter, sort, token) {
   const [complaints, setComplaints] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [errors, setErrors] = useState(false);
@@ -46,7 +46,10 @@ export function useFetch(filter, sort) {
   useEffect(() => {
     fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body: JSON.stringify({
         query: _COMPLAINTS_QUERY,
         variables: {

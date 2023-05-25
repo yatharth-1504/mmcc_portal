@@ -3,12 +3,16 @@ import { useFetch } from "../../hooks/fetch";
 import { NavBar } from "../../components/Nav/NavBar";
 import { useState } from "react";
 import "./Complaint.scss";
+import { useLocation } from "react-router-dom";
 
 export function Complaint() {
+  const { state } = useLocation();
+  const { token } = state;
+
   const [filter, setFilter] = useState("All Complaints");
   const [sort, setSort] = useState("Date(newest first)");
 
-  const { complaints, isPending, errors } = useFetch(filter, sort);
+  const { complaints, isPending, errors } = useFetch(filter, sort, token);
 
   const useFilters = (value) => {
     setFilter(value);
