@@ -39,7 +39,7 @@ export function Complaint() {
 
   return (
     <div className="Complaints">
-      <NavBar buttons={buttons} />
+      <NavBar buttons={buttons} token={token} />
       {isPending && <div className="Loading">Loading ...</div>}
       {errors && (
         <div className="Error">

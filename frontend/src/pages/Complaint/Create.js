@@ -1,9 +1,12 @@
 import "./Create.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useCreateComplaint } from "../../hooks/post";
 
 export function Create() {
+  const { state } = useLocation();
+  const { token } = state;
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [verticle, setVerticle] = useState("");
@@ -20,6 +23,12 @@ export function Create() {
         ],
       },
     },
+    context: {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    },
   });
 
   const onCreateComplaint = async (e) => {
@@ -28,7 +37,7 @@ export function Create() {
     setTitle("");
     setDescription("");
     setVerticle("");
-    navigate("/complaints");
+    navigate("/complaints", { state: { token: token } });
   };
 
   return (

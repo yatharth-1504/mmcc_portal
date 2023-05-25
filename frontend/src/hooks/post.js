@@ -10,9 +10,12 @@ const ADD_COMPLAINT_MUTATION = gql`
   }
 `;
 
-export const useCreateComplaint = ({ variables }) => {
+export const useCreateComplaint = ({ variables, context }) => {
   let addComplaint;
-  return ([addComplaint] = useMutation(ADD_COMPLAINT_MUTATION, { variables }));
+  return ([addComplaint] = useMutation(ADD_COMPLAINT_MUTATION, {
+    variables,
+    context,
+  }));
 };
 
 // Login

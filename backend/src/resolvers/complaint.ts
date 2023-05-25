@@ -15,10 +15,10 @@ import User from "../entities/user";
 @Resolver(() => Complaint)
 class ComplaintResolver {
   @Mutation(() => Complaint)
-  // @Authorized()
+  @Authorized()
   async addComplaint(
     @Arg("complaint") complaintInput: CreateComplaintInput,
-    // @Ctx() { user }: MyContext
+    @Ctx() { user }: MyContext
   ) {
     try {
       let imageUrls = "";
@@ -31,7 +31,7 @@ class ComplaintResolver {
         status: ComplaintStatus.POSTED,
         verticle: complaintInput.verticle,
         images: imageUrls === "" ? null : imageUrls,
-        // user,
+        user,
       }).save();
       return complaintCreated;
     } catch (e) {

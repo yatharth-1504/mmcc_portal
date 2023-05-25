@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import add_img from "../../assets/add-button.jpg";
 import "./NavBar.scss";
 
-export function NavBar({ buttons }) {
+export function NavBar({ buttons, token }) {
   const navigate = useNavigate();
 
   return (
@@ -21,7 +21,7 @@ export function NavBar({ buttons }) {
             </select>
           </div>
         ))}
-        <button onClick={() => navigate("/create")}>
+        <button onClick={() => navigate("/create", { state: { token } })}>
           <img className="img" src={add_img} alt="add-icon"></img>
           {"Add Compliant"}
         </button>
