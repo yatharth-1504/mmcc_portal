@@ -40,13 +40,19 @@ export function Complaint() {
   return (
     <div className="Complaints">
       <NavBar buttons={buttons} token={token} />
-      {isPending && <div className="Loading">Loading ...</div>}
-      {errors && (
-        <div className="Error">
-          Errors in fetching the resource... :({errors}
-        </div>
-      )}
-      {!!complaints && <Preview complaints={complaints} />}
+      <div className="complaints-wrapper">
+        {isPending && <div className="Loading">Loading ...</div>}
+        {errors && (
+          <div className="Error">
+            Errors in fetching the resource... :({errors}
+          </div>
+        )}
+        { (complaints == null || complaints.length === 0) ? 
+          <div className="no-complaints">
+            Have a Complaint ? Add it here
+          </div> : null}
+        {!!complaints && <Preview complaints={complaints} />}
+      </div>
     </div>
   );
 }

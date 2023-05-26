@@ -1,16 +1,28 @@
 @import "../../index.scss";
 
 .Login-Page {
-  height: $page-hieght;
-  width: $page-width;
-  display: $page-display;
-  justify-content: $justify-content;
-  align-items: $align-items;
-  flex-direction: column;
-  h2 {
-    font-size: $heading-size;
+  background-image: url('../../assets/loginBG.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: rgb(255, 243, 237);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+
+  .login-content{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .heading {
+    font-size: 24px;
+    font-weight: bold;
     color: $form-color;
-    margin-bottom: $bottom-margin;
-    padding-bottom: $bottom-padding;
+    padding: 20px;
   }
 }

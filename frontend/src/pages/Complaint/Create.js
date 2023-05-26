@@ -2,6 +2,7 @@ import "./Create.scss";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useCreateComplaint } from "../../hooks/post";
+import Overlay from "../../components/Overlay/Overlay";
 
 export function Create() {
   const { state } = useLocation();
@@ -10,6 +11,7 @@ export function Create() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [verticle, setVerticle] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   const navigate = useNavigate();
   const [addComplaint] = useCreateComplaint({
@@ -37,7 +39,7 @@ export function Create() {
     setTitle("");
     setDescription("");
     setVerticle("");
-    navigate("/complaints", { state: { token: token } });
+    setSubmitted(true)
   };
 
   return (
@@ -69,8 +71,26 @@ export function Create() {
           value={verticle}
           onChange={(e) => setVerticle(e.target.value)}
         />
+
+        <div className="upload-images">Upload images (optional)</div>
+        <input type="file"/>
         <button type="submit">Submit</button>
       </form>
+
+      { submitted ?
+        <Overlay
+          title={"Submitted Successfully"}
+          closeFunction={() => navigate("/complaints", { state: { token: token } })}
+          children={
+            <div className="submit-overlay">
+              <div className="submit-msg">
+                Your Complaint was successfully submitted. Necessary action will be taken
+              </div>
+              <div className="close-btn" onClick={() => navigate("/complaints", { state: { token: token } })}>Close</div>
+            </div>
+          }
+        /> : null
+      }
     </div>
   );
 }

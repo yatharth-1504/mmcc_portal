@@ -26,19 +26,23 @@ export function Login() {
 
   return (
     <div className="Login-Page">
-      <h2>Login With your SMAIL :)</h2>
-      <GoogleLogin
-        onSuccess={(credentialResponse) => {
-          const USER_CREDENTIALS = jwtDecode(credentialResponse.credential);
-          setRoll(USER_CREDENTIALS.email);
-          setName(USER_CREDENTIALS.name);
-          onLogin();
-        }}
-        onError={() => {
-          console.log("Login Failed");
-        }}
-        useOneTap
-      />
+      <div className="login-content">
+        <div className="heading">Login With your SMAIL :)</div>
+        <div className="LoginBtn">
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              const USER_CREDENTIALS = jwtDecode(credentialResponse.credential);
+              setRoll(USER_CREDENTIALS.email);
+              setName(USER_CREDENTIALS.name);
+              onLogin();
+            }}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+            useOneTap
+          />
+        </div>
+      </div>
     </div>
   );
 }

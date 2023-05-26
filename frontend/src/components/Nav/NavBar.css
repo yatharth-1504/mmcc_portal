@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  font-family: "Quicksand";
+  color: #333;
+  overflow: hidden;
+}
+
+.Nav {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: auto;
+  margin-top: 15px;
+  border-radius: 20px;
+  background-color: rgb(237, 235, 230);
+}
+.Nav button {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  font-size: 14px;
+  border: transparent;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 10px;
+  background-color: rgb(194, 188, 176);
+}
+.Nav button:hover {
+  opacity: 0.8;
+}
+.Nav .img {
+  border-radius: 15px;
+  height: 30px;
+  margin-right: 5px;
+}
+.Nav .filters_sort {
+  font-size: 13px;
+  margin: 10px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.Nav .filters_sort .dropbtn {
+  padding: 6px;
+  border: transparent;
+  margin: 10px;
+  border-radius: 20px;
+  background-color: #ffffff;
+}
+.Nav .filters_sort .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.Nav .filters_sort .dropdown-content .dropdown-elements {
+  padding: 10px;
+  margin: 10px;
+}
+
+.dropbtn:hover .dropdown-content {
+  display: block;
+}/*# sourceMappingURL=NavBar.css.map */

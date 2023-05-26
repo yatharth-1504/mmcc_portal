@@ -20,7 +20,6 @@ const main = async () => {
       let user;
       try {
         const token = req.headers.authorization;
-        console.log(req.headers);
         const decoded: any = jwt.verify(
           token.split("Bearer ")[1],
           process.env.JWT_SECRET!

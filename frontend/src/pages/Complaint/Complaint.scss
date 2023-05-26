@@ -13,3 +13,30 @@
   font-size: 15px;
   color: $error-color;
 }
+
+.Complaints{
+  // background-color: rgb(255, 243, 237);
+  background-color: white;
+  height: 100vh;
+  overflow: auto;
+
+  .complaints-wrapper{
+
+    position: relative;
+    // overflow: auto;
+    top: 10%;
+
+    .no-complaints{
+      background-image: url('../../assets//complaintsBG.png');
+      background-repeat: no-repeat;
+      height: 60vh;
+      width: 80vw;
+      display: flex;
+      justify-content: center;
+      padding-top: 200px;
+      align-items: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+  }
+}

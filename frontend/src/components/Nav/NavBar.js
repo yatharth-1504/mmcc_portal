@@ -6,21 +6,23 @@ export function NavBar({ buttons, token }) {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="nav-wrapper">
       <nav className="Nav">
-        {buttons.map((button) => (
-          <div className="filters_sort" key={button.id}>
-            {button.name + ":"}
-            <select
-              className="dropdown"
-              onChange={(event) => button.method(event.target.value)}
-            >
-              {button.conditions.map((c, id) => (
-                <option key={id}>{c}</option>
-              ))}
-            </select>
-          </div>
-        ))}
+        <div className="filters">
+          {buttons.map((button) => (
+            <div className="filters_sort" key={button.id}>
+              {button.name + ":"}
+              <select
+                className="dropdown"
+                onChange={(event) => button.method(event.target.value)}
+              >
+                {button.conditions.map((c, id) => (
+                  <option key={id}>{c}</option>
+                ))}
+              </select>
+            </div>
+          ))}
+        </div>
         <button onClick={() => navigate("/create", { state: { token } })}>
           <img className="img" src={add_img} alt="add-icon"></img>
           {"Add Compliant"}

@@ -6,6 +6,7 @@
   display: $page-display;
   justify-content: $justify-content;
   align-items: $align-items;
+  background-color: rgb(255, 243, 237);
   .Create-Form {
     width: $form-width;
     text-align: $form-text-align;
@@ -18,17 +19,28 @@
       color: $form-color;
       margin-bottom: $bottom-margin;
     }
+
+    .upload-images{
+      text-align: left;
+    }
   }
   input,
   textarea,
   select {
     width: $input_select_width;
     padding: $input_select_padding;
-    margin: $input-select_margin;
+    margin: 15px 0;
     border: $input_select_border;
     box-sizing: $input_select_box_sizing;
     display: $label_input_select-display;
+    border-radius: 5px;
+    height: 40px;
   }
+
+  textarea{
+    height: 75px;
+  }
+
   button {
     background: $form-color;
     color: $button-color;
@@ -36,5 +48,19 @@
     padding: $button-padding;
     border-radius: $button-border-radius;
     cursor: $button-cursor;
+  }
+
+  .submit-overlay{
+
+    .close-btn{
+      padding: 7px 12px;
+      margin: 10px 0;
+      background-color: green;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      width: fit-content;
+      align-self: flex-end;
+    }
   }
 }
