@@ -47,7 +47,7 @@ export function Complaint() {
             Errors in fetching the resource... :({errors}
           </div>
         )}
-        { (complaints == null || complaints.length === 0) ? 
+        { (complaints?.length === 0) ? 
           <div className="no-complaints">
             Have a Complaint ? Add it here
           </div> : null}
