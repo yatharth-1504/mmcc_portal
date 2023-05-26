@@ -64,13 +64,11 @@ export function Create() {
           }}
         />
         <label htmlFor="verticle">Verticle:</label>
-        <input
-          id="verticle"
-          type="text"
-          required
-          value={verticle}
-          onChange={(e) => setVerticle(e.target.value)}
-        />
+
+        <select onChange={(e) => setVerticle(e.target.value)}>
+          <option>MMCC</option>
+          <option>CMGFS</option>
+        </select>
 
         <div className="upload-images">Upload images (optional)</div>
         <input type="file"/>
