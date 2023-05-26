@@ -1,19 +1,25 @@
 import { useState } from "react";
+import { useAssign } from "../../hooks/update";
 import "./Preview.scss";
 import Overlay from "../Overlay/Overlay";
 
 export function Preview({ complaints }) {
-
-  const [element, setElement] = useState('complaints');
+  const [element, setElement] = useState("complaints");
   const [assignRoll, setAssignRoll] = useState();
 
-  const onAssign = () => {
-    console.log(assignRoll)
-  }
+  const [assign] = useAssign({
+    variables: {
+      // add complaint id
+    },
+    // add header,
+  });
 
-  const onAction = () => {
+  const onAssign = async () => {
+    // await assign();
+    console.log("hi");
+  };
 
-  }
+  const onAction = () => {};
 
   return (
     <div className="Preview">
@@ -34,47 +40,77 @@ export function Preview({ complaints }) {
             {/* <p>Raised By: {complaint.user.id}</p> */}
             <div className="complaint-footer">
               <div className="user-side">
-                <div className="time"><b>Posted at:</b> {complaint.createdAt.split("T")[0]}</div>
-                <div className="status"><b>Status:</b> {complaint.status}</div>
+                <div className="time">
+                  <b>Posted at:</b> {complaint.createdAt.split("T")[0]}
+                </div>
+                <div className="status">
+                  <b>Status:</b> {complaint.status}
+                </div>
               </div>
 
               <div className="admin-side">
-                <div className="assign button" onClick={()=>{setElement('assignComplaint')}}>Assign Complaint</div>
-                <div className="action button" onClick={()=>{setElement('takeAction')}}>Take Action</div>
+                <div
+                  className="assign button"
+                  onClick={() => {
+                    setElement("assignComplaint");
+                  }}
+                >
+                  Assign Complaint
+                </div>
+                <div
+                  className="action button"
+                  onClick={() => {
+                    setElement("takeAction");
+                  }}
+                >
+                  Take Action
+                </div>
               </div>
             </div>
           </div>
         </div>
       ))}
 
-      {(element === 'assignComplaint') ? 
+      {element === "assignComplaint" ? (
         <Overlay
           title={"Assign Complaint"}
-          closeFunction={() => setElement('complaints')}
+          closeFunction={() => setElement("complaints")}
           children={
             <div className="assign-overlay">
-              <input 
-                className="roll-input" 
+              <input
+                className="roll-input"
                 placeholder="Enter the roll no you want to assign it to"
-                onChange={(e) => {setAssignRoll(e.target.value)}} 
-                required 
+                onChange={(e) => {
+                  setAssignRoll(e.target.value);
+                }}
+                required
                 autoFocus={true}
               />
               <div className="btns">
-                <div className="cancel-btn" onClick={() => {setElement('complaints')}}>Cancel</div>
-                <div className="assign-btn" onClick={onAssign}>Assign Complaint</div>
+                <div
+                  className="cancel-btn"
+                  onClick={() => {
+                    setElement("complaints");
+                  }}
+                >
+                  Cancel
+                </div>
+                <div className="assign-btn" onClick={onAssign}>
+                  Assign Complaint
+                </div>
               </div>
             </div>
           }
-        /> : (element === 'takeAction') ? 
+        />
+      ) : element === "takeAction" ? (
         <Overlay
           title={"Take Action"}
-          closeFunction={() => setElement('complaints')}
+          closeFunction={() => setElement("complaints")}
           children={
             <div className="action-overlay">
               <div className="proof">
                 Upload proof of action
-                <input type="file" className="proofOfAction"/>
+                <input type="file" className="proofOfAction" />
               </div>
               <select className="select">
                 <option>Resolve</option>
@@ -82,13 +118,22 @@ export function Preview({ complaints }) {
               </select>
 
               <div className="btns">
-                <div className="cancel-btn" onClick={() => {setElement('complaints')}}>Cancel</div>
-                <div className="assign-btn" onClick={onAction}>Take Action</div>
+                <div
+                  className="cancel-btn"
+                  onClick={() => {
+                    setElement("complaints");
+                  }}
+                >
+                  Cancel
+                </div>
+                <div className="assign-btn" onClick={onAction}>
+                  Take Action
+                </div>
               </div>
             </div>
           }
-        /> : null
-      }
+        />
+      ) : null}
     </div>
   );
 }
