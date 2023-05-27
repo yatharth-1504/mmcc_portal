@@ -3,15 +3,17 @@
 .Create-Page {
   height: $page-hieght;
   width: $page-width;
-  display: $page-display;
+  display: flex;
+  flex-direction: column;
   justify-content: $justify-content;
   align-items: $align-items;
   background-color: rgb(253, 249, 248);
+
   .Create-Form {
     width: $form-width;
-    text-align: $form-text-align;
+    text-align: center;
     label {
-      text-align: $label-text-align;
+      text-align: left;
       display: $label_input_select-display;
     }
     h2 {
@@ -23,7 +25,14 @@
     .upload-images{
       text-align: left;
     }
+
+    .image{
+      height: 100px;
+      text-align: center;
+      margin: 10px 0;
+    }
   }
+
   input,
   textarea,
   select {
@@ -41,13 +50,19 @@
     height: 75px;
   }
 
-  button {
-    background: $form-color;
-    color: $button-color;
-    border: $button-border;
-    padding: $button-padding;
-    border-radius: $button-border-radius;
-    cursor: $button-cursor;
+  .btn-wrapper{
+    width: 100%;
+    margin: 10px 0;
+
+    .submit-btn {
+      background: $form-color;
+      color: $button-color;
+      border: $button-border;
+      padding: $button-padding;
+      border-radius: $button-border-radius;
+      cursor: $button-cursor;
+      width: fit-content;
+    }
   }
 
   .submit-overlay{

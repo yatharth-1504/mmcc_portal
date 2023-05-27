@@ -6,6 +6,7 @@ import Overlay from "../Overlay/Overlay";
 export function Preview({ complaints }) {
   const [element, setElement] = useState("complaints");
   const [assignRoll, setAssignRoll] = useState();
+  const [complaintId, setComplaintId] = useState();
 
   const [assign] = useAssign({
     variables: {
@@ -53,6 +54,7 @@ export function Preview({ complaints }) {
                   className="assign button"
                   onClick={() => {
                     setElement("assignComplaint");
+                    setComplaintId(complaint.id)
                   }}
                 >
                   Assign Complaint
@@ -61,6 +63,7 @@ export function Preview({ complaints }) {
                   className="action button"
                   onClick={() => {
                     setElement("takeAction");
+                    setComplaintId(complaint.id)
                   }}
                 >
                   Take Action
