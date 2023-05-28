@@ -52,8 +52,11 @@ class ResolveComplaintInput {
   @Field()
   complaintId: string;
 
-  @Field()
-  proof: string;
+  @Field(() => [String], { nullable: true })
+  proofImage: string[];
+
+  @Field({ nullable: true })
+  proofDesc: string;
 
   @Field()
   status: ComplaintStatus;

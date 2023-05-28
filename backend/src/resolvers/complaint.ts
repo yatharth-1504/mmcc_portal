@@ -131,7 +131,12 @@ class ComplaintResolver {
       );
       if (user.id !== complaint.assignedTo.id) throw new Error("UnAuthorised");
       complaint.status = resolveComplaintInput.status;
-      complaint.proof = resolveComplaintInput.proof;
+      let imageUrls = "";
+      if (resolveComplaintInput.proofImage) {
+        imageUrls = resolveComplaintInput.proofImage.join(" AND ");
+      }
+      complaint.proofImage = imageUrls === "" ? null : imageUrls;
+      complaint.proofDesc = resolveComplaintInput.proofDesc;
       const complaintUpdated = await complaint.save();
       return !!complaintUpdated;
     } catch (err) {

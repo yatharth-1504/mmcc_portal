@@ -55,9 +55,13 @@ class Complaint extends BaseEntity {
   @Field(() => String, { nullable: true })
   images: string | null;
 
+  @Column({ type: "text", nullable: true })
+  @Field(() => String, { nullable: true })
+  proofImage: string | null;
+
   @Column({ nullable: true })
   @Field({ nullable: true })
-  proof: string;
+  proofDesc: string;
 }
 
 export default Complaint;
