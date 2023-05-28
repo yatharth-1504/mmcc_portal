@@ -1,7 +1,7 @@
 import { Preview } from "../../components/Preview/Preview";
-import { useFetch } from "../../hooks/fetch";
+import { useFetch, useGetMe } from "../../hooks/fetch";
 import { NavBar } from "../../components/Nav/NavBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Complaint.scss";
 import { useLocation } from "react-router-dom";
 
@@ -12,7 +12,9 @@ export function Complaint() {
   const [filter, setFilter] = useState("All Complaints");
   const [sort, setSort] = useState("Date(newest first)");
 
-  const { complaints, isPending, errors } = useFetch(filter, sort, token);
+  const { complaints, isPending, errors, user } = useFetch(filter, sort, token);
+
+  console.log("User: ", user)
 
   const useFilters = (value) => {
     setFilter(value);
@@ -51,7 +53,7 @@ export function Complaint() {
           <div className="no-complaints">
             Have a Complaint ? Add it here
           </div> : null}
-        {!!complaints && <Preview complaints={complaints} />}
+        {!!complaints && <Preview complaints={complaints} token={token}/>}
       </div>
     </div>
   );

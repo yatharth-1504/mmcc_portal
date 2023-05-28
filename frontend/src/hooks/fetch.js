@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useQuery, gql } from "@apollo/client";
 
 const filteringConditions = {
   verticle: null,
@@ -11,7 +12,7 @@ const sortConditions = {
   createdAt: true,
 };
 
-const _COMPLAINTS_QUERY = `query GetComplaints($sortConditions: SortConditions!, $filteringConditions: FilteringConditions!) {
+const FETCH_QUERY = `query GetComplaints($sortConditions: SortConditions!, $filteringConditions: FilteringConditions!) {
   getComplaints(sortConditions: $sortConditions, filteringConditions: $filteringConditions) {
     id
     title
@@ -20,6 +21,12 @@ const _COMPLAINTS_QUERY = `query GetComplaints($sortConditions: SortConditions!,
     images
     verticle
     status
+  }
+  getMe {
+    id
+    name
+    roll
+    role
   }
 }
 `;
@@ -30,6 +37,9 @@ export function useFetch(filter, sort, token) {
   const [complaints, setComplaints] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [errors, setErrors] = useState(false);
+  const [user, setUser] = useState(null)
+
+  console.log("Fetching complaints 🙂")
 
   if (filter === "MMCC") {
     filteringConditions.verticle = "MMCC";
@@ -51,7 +61,7 @@ export function useFetch(filter, sort, token) {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        query: _COMPLAINTS_QUERY,
+        query: FETCH_QUERY,
         variables: {
           filteringConditions,
           sortConditions,
@@ -66,6 +76,7 @@ export function useFetch(filter, sort, token) {
         return response.json();
       })
       .then((res_data) => {
+        setUser(res_data.data.getMe)
         setComplaints(res_data.data.getComplaints);
         setIsPending(false);
       })
@@ -76,5 +87,5 @@ export function useFetch(filter, sort, token) {
       });
   }, [filter, sort]);
 
-  return { complaints, isPending, errors };
+  return { complaints, isPending, errors, user };
 }

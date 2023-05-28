@@ -28,9 +28,11 @@ class User extends BaseEntity {
   roll: string;
 
   @Column("enum", { enum: UserRole, default: UserRole.USER })
+  @Field()
   role: UserRole;
 
   @Column("enum", { nullable: true, enum: Verticle })
+  @Field()
   verticle: Verticle;
 
   @OneToMany(() => Complaint, (complaint) => complaint.user, {

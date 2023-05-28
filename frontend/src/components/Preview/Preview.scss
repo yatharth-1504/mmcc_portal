@@ -89,12 +89,20 @@
     justify-content: space-between;
 
     .proof{
-      display: flex;
       
       .proofOfAction{
         width: 70%;
-        margin: 5px 0;
+        margin: 12px 0;
       }
+
+      .image{
+        height: 120px;
+
+        &.none{
+          display: none;
+        }
+      }
+
     }
 
     .select{

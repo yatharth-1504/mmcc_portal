@@ -1,26 +1,82 @@
 import { useState } from "react";
-import { useAssign } from "../../hooks/update";
+import { useAssign, useResolve } from "../../hooks/update";
 import "./Preview.scss";
 import Overlay from "../Overlay/Overlay";
+import { useNavigate } from "react-router-dom";
 
-export function Preview({ complaints }) {
+export function Preview({ complaints, token }) {
   const [element, setElement] = useState("complaints");
   const [assignRoll, setAssignRoll] = useState();
   const [complaintId, setComplaintId] = useState();
+  const [imageUrl, setImageUrl] = useState();
+  const [status, setStatus] = useState('RESOLVED');
+
+  const navigate = useNavigate()
+  const validRollno = new RegExp('^[a-zA-Z].[0-9].[a-zA-Z][0-9]..$')
 
   const [assign] = useAssign({
     variables: {
-      // add complaint id
+      complaintId: complaintId,
+      roll: assignRoll + '@smail.iitm.ac.in'
     },
-    // add header,
+    context: {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    },
   });
 
+  const [resolve] = useResolve({
+    variables: {
+      complaintId: complaintId,
+      proof: imageUrl,
+      status: status
+    },
+    context: {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  })
+
   const onAssign = async () => {
-    // await assign();
-    console.log("hi");
+    if(validRollno.test(assignRoll)){
+      const assignOutput = await assign();
+      console.log("AssignOutput: ", assignOutput);
+      setAssignRoll(null)
+      setElement('complaints')
+      navigate("/complaints", { state: { token: token } })
+    }else{
+      console.log("Invalid Roll no")
+    }
   };
 
-  const onAction = () => {};
+  const onAction = async () => {
+    if(imageUrl === undefined || imageUrl === '' || imageUrl === null){
+      console.log("Image Required")
+    }else{
+      const resolveOutput = await resolve()
+      console.log("ResolveOutput: ", resolveOutput)
+      setStatus('RESOLVED')
+      setImageUrl(null)
+      setElement('complaints')
+      navigate("/complaints", { state: { token: token } })
+    }
+  };
+
+  var openFile = function(file) {
+    var input = file.target;
+    var reader = new FileReader();
+    reader.onload = function(){
+      var dataURL = reader.result;
+      var output = document.getElementById('output');
+      output.src = dataURL;
+      setImageUrl(dataURL)
+    };
+    reader.readAsDataURL(input.files[0]);
+  };
 
   return (
     <div className="Preview">
@@ -77,7 +133,11 @@ export function Preview({ complaints }) {
       {element === "assignComplaint" ? (
         <Overlay
           title={"Assign Complaint"}
-          closeFunction={() => setElement("complaints")}
+          closeFunction={() => {
+            setElement("complaints")
+            setImageUrl(null)
+            setStatus('RESOLVED')
+          }}
           children={
             <div className="assign-overlay">
               <input
@@ -93,6 +153,8 @@ export function Preview({ complaints }) {
                 <div
                   className="cancel-btn"
                   onClick={() => {
+                    setImageUrl(null)
+                    setStatus('RESOLVED')
                     setElement("complaints");
                   }}
                 >
@@ -113,11 +175,12 @@ export function Preview({ complaints }) {
             <div className="action-overlay">
               <div className="proof">
                 Upload proof of action
-                <input type="file" className="proofOfAction" />
+                <input className="proofOfAction" type="file" accept="image/*" onChange={(e) => openFile(e)} id="uploadImage" name="myPhoto"/>
+                <img className={`image ${imageUrl ? "" : "none"}`} id="output" alt=''/>
               </div>
-              <select className="select">
-                <option>Resolve</option>
-                <option>Reject</option>
+              <select className="select" onChange={(e) => setStatus(e.target.value)}>
+                <option>RESOLVED</option>
+                <option>REJECTED</option>
               </select>
 
               <div className="btns">

@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+* {
+  margin: 0;
+  font-family: "Quicksand";
+  color: #333;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  border-top-right-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: rgb(253, 249, 248);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(221, 172, 166);
+  border: 3px solid rgb(221, 172, 166);
+}/*# sourceMappingURL=index.css.map */
