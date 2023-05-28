@@ -2,7 +2,7 @@
 import { useMutation, gql } from "@apollo/client";
 
 const ASSIGN_COMPLAINT_MUTATION = gql`
-  mutation Mutation($assignComplaint: AssignComplaintInput!) {
+  mutation Assign($assignComplaint: AssignComplaintInput!) {
     assignComplaint(assignComplaint: $assignComplaint) {
       id
     }

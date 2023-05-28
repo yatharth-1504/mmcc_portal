@@ -9,15 +9,17 @@ export function Preview({ complaints, token }) {
   const [assignRoll, setAssignRoll] = useState();
   const [complaintId, setComplaintId] = useState();
   const [imageUrl, setImageUrl] = useState();
-  const [status, setStatus] = useState('RESOLVED');
+  const [status, setStatus] = useState("RESOLVED");
 
-  const navigate = useNavigate()
-  const validRollno = new RegExp('^[a-zA-Z].[0-9].[a-zA-Z][0-9]..$')
+  const navigate = useNavigate();
+  const validRollno = new RegExp("^[a-zA-Z].[0-9].[a-zA-Z][0-9]..$");
 
   const [assign] = useAssign({
     variables: {
-      complaintId: complaintId,
-      roll: assignRoll + '@smail.iitm.ac.in'
+      assignComplaint: {
+        complaintId: complaintId,
+        roll: assignRoll + "@smail.iitm.ac.in",
+      },
     },
     context: {
       headers: {
@@ -29,9 +31,11 @@ export function Preview({ complaints, token }) {
 
   const [resolve] = useResolve({
     variables: {
-      complaintId: complaintId,
-      proof: imageUrl,
-      status: status
+      resolveComplaint: {
+        complaintId: complaintId,
+        proof: imageUrl,
+        status: status,
+      },
     },
     context: {
       headers: {
@@ -39,41 +43,41 @@ export function Preview({ complaints, token }) {
         Authorization: `Bearer ${token}`,
       },
     },
-  })
+  });
 
   const onAssign = async () => {
-    if(validRollno.test(assignRoll)){
+    if (validRollno.test(assignRoll)) {
       const assignOutput = await assign();
       console.log("AssignOutput: ", assignOutput);
-      setAssignRoll(null)
-      setElement('complaints')
-      navigate("/complaints", { state: { token: token } })
-    }else{
-      console.log("Invalid Roll no")
+      setAssignRoll(null);
+      setElement("complaints");
+      navigate("/complaints", { state: { token: token } });
+    } else {
+      console.log("Invalid Roll no");
     }
   };
 
   const onAction = async () => {
-    if(imageUrl === undefined || imageUrl === '' || imageUrl === null){
-      console.log("Image Required")
-    }else{
-      const resolveOutput = await resolve()
-      console.log("ResolveOutput: ", resolveOutput)
-      setStatus('RESOLVED')
-      setImageUrl(null)
-      setElement('complaints')
-      navigate("/complaints", { state: { token: token } })
+    if (imageUrl === undefined || imageUrl === "" || imageUrl === null) {
+      console.log("Image Required");
+    } else {
+      const resolveOutput = await resolve();
+      console.log("ResolveOutput: ", resolveOutput);
+      setStatus("RESOLVED");
+      setImageUrl(null);
+      setElement("complaints");
+      navigate("/complaints", { state: { token: token } });
     }
   };
 
-  var openFile = function(file) {
+  var openFile = function (file) {
     var input = file.target;
     var reader = new FileReader();
-    reader.onload = function(){
+    reader.onload = function () {
       var dataURL = reader.result;
-      var output = document.getElementById('output');
+      var output = document.getElementById("output");
       output.src = dataURL;
-      setImageUrl(dataURL)
+      setImageUrl(dataURL);
     };
     reader.readAsDataURL(input.files[0]);
   };
@@ -110,7 +114,7 @@ export function Preview({ complaints, token }) {
                   className="assign button"
                   onClick={() => {
                     setElement("assignComplaint");
-                    setComplaintId(complaint.id)
+                    setComplaintId(complaint.id);
                   }}
                 >
                   Assign Complaint
@@ -119,7 +123,7 @@ export function Preview({ complaints, token }) {
                   className="action button"
                   onClick={() => {
                     setElement("takeAction");
-                    setComplaintId(complaint.id)
+                    setComplaintId(complaint.id);
                   }}
                 >
                   Take Action
@@ -134,9 +138,9 @@ export function Preview({ complaints, token }) {
         <Overlay
           title={"Assign Complaint"}
           closeFunction={() => {
-            setElement("complaints")
-            setImageUrl(null)
-            setStatus('RESOLVED')
+            setElement("complaints");
+            setImageUrl(null);
+            setStatus("RESOLVED");
           }}
           children={
             <div className="assign-overlay">
@@ -153,8 +157,8 @@ export function Preview({ complaints, token }) {
                 <div
                   className="cancel-btn"
                   onClick={() => {
-                    setImageUrl(null)
-                    setStatus('RESOLVED')
+                    setImageUrl(null);
+                    setStatus("RESOLVED");
                     setElement("complaints");
                   }}
                 >
@@ -175,10 +179,24 @@ export function Preview({ complaints, token }) {
             <div className="action-overlay">
               <div className="proof">
                 Upload proof of action
-                <input className="proofOfAction" type="file" accept="image/*" onChange={(e) => openFile(e)} id="uploadImage" name="myPhoto"/>
-                <img className={`image ${imageUrl ? "" : "none"}`} id="output" alt=''/>
+                <input
+                  className="proofOfAction"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => openFile(e)}
+                  id="uploadImage"
+                  name="myPhoto"
+                />
+                <img
+                  className={`image ${imageUrl ? "" : "none"}`}
+                  id="output"
+                  alt=""
+                />
               </div>
-              <select className="select" onChange={(e) => setStatus(e.target.value)}>
+              <select
+                className="select"
+                onChange={(e) => setStatus(e.target.value)}
+              >
                 <option>RESOLVED</option>
                 <option>REJECTED</option>
               </select>

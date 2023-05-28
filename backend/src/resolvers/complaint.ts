@@ -106,7 +106,7 @@ class ComplaintResolver {
       complaint.status = ComplaintStatus.ASSIGNED;
       complaint.assignedTo = _user;
       const complaintUpdated = await complaint.save();
-      return !!complaintUpdated;
+      return complaintUpdated;
     } catch (e) {
       throw new Error(e);
     }

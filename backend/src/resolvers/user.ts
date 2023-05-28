@@ -82,7 +82,7 @@ class UserResolver {
       user.role = updateRoleInput.role;
       user.verticle = updateRoleInput.verticle;
       const userUpdated = await user.save();
-      return !!userUpdated;
+      return userUpdated;
     } catch (e) {
       throw new Error(e);
     }
