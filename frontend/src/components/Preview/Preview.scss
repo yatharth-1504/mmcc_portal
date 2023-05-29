@@ -4,6 +4,7 @@
   padding-right: 20px;
   width: $box-width;
   margin: auto;
+  margin-bottom: 120px;
 
   .Complaint {
     display: flex;
@@ -14,14 +15,20 @@
     border-radius: $box-radius;
 
     .Complaint-Img {
-      padding: 20px;
+      padding: 10px;
       width: 20%;
       
       .Image {
         border: 2px rgb(77, 77, 76);
         width: 100%;
-        border-radius: $box-radius;
+        border-radius: 5px;
         object-fit: contain;
+      }
+
+      .title{
+        font-weight: bold;
+        font-size: 16px;
+        margin: 5px 0px;
       }
     }
 
@@ -50,8 +57,28 @@
         justify-content: space-between;
         align-items: center;
         
-        .time, .status{
+        .time{
           font-size: 16px;
+        }
+
+        .status{
+          font-size: 16px;
+          font-weight: bold;
+          padding: 5px 10px;
+          color: white;
+          border-radius: 5px;
+          
+          &.POSTED{
+            background-color: rgb(253, 153, 47);
+          }
+
+          &.RESOLVED{
+            background-color: rgb(45, 167, 45);
+          }
+
+          &.REJECTED{
+            background-color: rgb(255, 69, 69);
+          }
         }
 
         .button{
@@ -79,6 +106,20 @@
       padding: 10px;
       border-radius: 5px;
       width: 80%;
+
+      &.error{
+        border: 1px red solid;
+
+        &::placeholder{
+          color: red;
+        }
+      }
+    }
+
+    .error-msg{
+      color: red;
+      margin: 7px 0;
+      font-size: 12px;
     }
   }
 
@@ -108,6 +149,22 @@
     .select{
       width: fit-content;
       margin: 10px 0;
+    }
+  }
+
+  .success-overlay{
+
+    .button{
+      width: fit-content;
+      padding: 5px 10px;
+      margin: 5px 0;
+      background-color: rgb(221, 172, 166);
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+      text-align: center;
     }
   }
 

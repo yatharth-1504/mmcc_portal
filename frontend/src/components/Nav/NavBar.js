@@ -2,8 +2,9 @@ import { useNavigate } from "react-router-dom";
 import add_img from "../../assets/add-button.jpg";
 import "./NavBar.scss";
 
-export function NavBar({ buttons, token }) {
+export function NavBar({ buttons, token, userRole }) {
   const navigate = useNavigate();
+  console.log(userRole)
 
   return (
     <div className="nav-wrapper">
@@ -23,10 +24,18 @@ export function NavBar({ buttons, token }) {
             </div>
           ))}
         </div>
-        <button onClick={() => navigate("/create", { state: { token } })}>
-          <img className="img" src={add_img} alt="add-icon"></img>
-          {"Add Compliant"}
-        </button>
+        {userRole === "COORD" ? null : 
+          <button onClick={() => {
+            if(userRole === 'USER'){
+              navigate("/create", { state: { token } })
+            }else{
+              // TODO: updateRoleFunction()
+            }
+          }}>
+            <img className="img" src={add_img} alt="add-icon"></img>
+            {`${userRole === 'USER' ? "Add Complaint" : "Update Role"}`}
+          </button>
+        }
       </nav>
     </div>
   );

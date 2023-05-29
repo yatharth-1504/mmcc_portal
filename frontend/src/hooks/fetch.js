@@ -21,6 +21,8 @@ const FETCH_QUERY = `query GetComplaints($sortConditions: SortConditions!, $filt
     images
     verticle
     status
+    proofImage
+    proofDesc
   }
   getMe {
     id

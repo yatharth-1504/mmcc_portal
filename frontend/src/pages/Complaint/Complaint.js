@@ -1,7 +1,7 @@
 import { Preview } from "../../components/Preview/Preview";
-import { useFetch, useGetMe } from "../../hooks/fetch";
+import { useFetch } from "../../hooks/fetch";
 import { NavBar } from "../../components/Nav/NavBar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./Complaint.scss";
 import { useLocation } from "react-router-dom";
 
@@ -41,20 +41,24 @@ export function Complaint() {
 
   return (
     <div className="Complaints">
-      <NavBar buttons={buttons} token={token} />
-      <div className="complaints-wrapper">
-        {isPending && <div className="Loading">Loading ...</div>}
-        {errors && (
-          <div className="Error">
-            Errors in fetching the resource... :({errors}
+      {user ? 
+        <div>
+          <NavBar buttons={buttons} token={token} userRole={user.role}/>
+          <div className="complaints-wrapper">
+            {isPending && <div className="Loading">Loading ...</div>}
+            {errors && (
+              <div className="Error">
+                Errors in fetching the resource... :({errors}
+              </div>
+            )}
+            { (complaints?.length === 0) ? 
+              <div className="no-complaints">
+                Have a Complaint ? Add it here
+              </div> : null}
+            {!!complaints && <Preview complaints={complaints} token={token} user={user}/>}
           </div>
-        )}
-        { (complaints?.length === 0) ? 
-          <div className="no-complaints">
-            Have a Complaint ? Add it here
-          </div> : null}
-        {!!complaints && <Preview complaints={complaints} token={token}/>}
-      </div>
+        </div> : null
+      }
     </div>
   );
 }
