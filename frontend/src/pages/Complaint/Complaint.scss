@@ -14,26 +14,30 @@
   color: $error-color;
 }
 
-.Complaints{
+.Complaints {
   // background-color: rgb(255, 243, 237);
   background-color: white;
   height: 100vh;
   overflow: auto;
 
-  .complaints-wrapper{
-
+  .complaints-wrapper {
     position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     // overflow: auto;
     top: 15vh;
 
-    .no-complaints{
-      background-image: url('../../assets//complaintsBG.png');
+    .no-complaints {
+      background-image: url("../../assets//complaintsBG.png");
       background-repeat: no-repeat;
-      height: 60vh;
-      width: 80vw;
+      height: 50vh;
+      padding-top: 200px;
+      width: 60%;
       display: flex;
       justify-content: center;
-      padding-top: 200px;
+      flex-direction: column;
       align-items: center;
       font-size: 24px;
       font-weight: bold;

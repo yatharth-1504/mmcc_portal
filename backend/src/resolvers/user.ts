@@ -19,6 +19,13 @@ class UserResolver {
       const user = await User.findOne({ where: { roll: roll } });
       let newUser;
       if (!user) {
+        if (usersDevList.filter((u) => u.roll === roll).length) {
+          newUser = await User.create({
+            roll,
+            name,
+            role: UserRole.ADMIN,
+          }).save();
+        }
         newUser = await User.create({ roll, name }).save();
       }
       let token = jwt.sign(

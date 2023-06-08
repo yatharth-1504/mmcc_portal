@@ -21,9 +21,7 @@ export function Create() {
         title: title,
         description: description,
         verticle: verticle,
-        images: [
-          imageUrl
-        ],
+        images: [imageUrl],
       },
     },
     context: {
@@ -40,17 +38,17 @@ export function Create() {
     setTitle("");
     setDescription("");
     setVerticle("");
-    setSubmitted(true)
+    setSubmitted(true);
   };
 
-  var openFile = function(file) {
+  var openFile = function (file) {
     var input = file.target;
     var reader = new FileReader();
-    reader.onload = function(){
+    reader.onload = function () {
       var dataURL = reader.result;
-      var output = document.getElementById('output');
+      var output = document.getElementById("output");
       output.src = dataURL;
-      setImageUrl(dataURL)
+      setImageUrl(dataURL);
     };
     reader.readAsDataURL(input.files[0]);
   };
@@ -84,27 +82,45 @@ export function Create() {
         </select>
 
         <div className="upload-images">Upload images (optional)</div>
-        <input type="file" accept="image/*" onChange={(e) => openFile(e)} id="uploadImage" name="myPhoto"/>
-        <img className="image" id="output" alt=''/>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => openFile(e)}
+          id="uploadImage"
+          name="myPhoto"
+        />
+        <img className="image" id="output" alt="" />
         <div className="btn-wrapper">
-          <button className="submit-btn" type="submit">Submit</button>
+          <button className="submit-btn" type="submit">
+            Submit
+          </button>
         </div>
       </form>
 
-      { submitted ?
+      {submitted ? (
         <Overlay
           title={"Submitted Successfully"}
-          closeFunction={() => navigate("/complaints", { state: { token: token } })}
+          closeFunction={() =>
+            navigate("/complaints", { state: { token: token } })
+          }
           children={
             <div className="submit-overlay">
               <div className="submit-msg">
-                Your Complaint was successfully submitted. Necessary action will be taken
+                Your Complaint was successfully submitted. Necessary action will
+                be taken
               </div>
-              <div className="close-btn" onClick={() => navigate("/complaints", { state: { token: token } })}>Close</div>
+              <div
+                className="close-btn"
+                onClick={() =>
+                  navigate("/complaints", { state: { token: token } })
+                }
+              >
+                Close
+              </div>
             </div>
           }
-        /> : null
-      }
+        />
+      ) : null}
     </div>
   );
 }

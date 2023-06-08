@@ -14,7 +14,7 @@ export function Complaint() {
 
   const { complaints, isPending, errors, user } = useFetch(filter, sort, token);
 
-  console.log("User: ", user)
+  console.log("User: ", user);
 
   const useFilters = (value) => {
     setFilter(value);
@@ -41,9 +41,9 @@ export function Complaint() {
 
   return (
     <div className="Complaints">
-      {user ? 
+      {user ? (
         <div>
-          <NavBar buttons={buttons} token={token} userRole={user.role}/>
+          <NavBar buttons={buttons} token={token} userRole={user.role} />
           <div className="complaints-wrapper">
             {isPending && <div className="Loading">Loading ...</div>}
             {errors && (
@@ -51,14 +51,18 @@ export function Complaint() {
                 Errors in fetching the resource... :({errors}
               </div>
             )}
-            { (complaints?.length === 0) ? 
+            {complaints?.length === 0 ? (
               <div className="no-complaints">
                 Have a Complaint ? Add it here
-              </div> : null}
-            {!!complaints && <Preview complaints={complaints} token={token} user={user}/>}
+                {/* <img src={require("../../assets//complaintsBG.png")} alt="bg" /> */}
+              </div>
+            ) : null}
+            {!!complaints && (
+              <Preview complaints={complaints} token={token} user={user} />
+            )}
           </div>
-        </div> : null
-      }
+        </div>
+      ) : null}
     </div>
   );
 }
