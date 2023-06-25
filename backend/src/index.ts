@@ -1,4 +1,4 @@
-import { ApolloServer } from "apollo-server";
+import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import "reflect-metadata";
 import dotenv from "dotenv";
@@ -8,11 +8,15 @@ import resolvers from "./resolvers/index";
 import entities from "./entities/index";
 import authChecker from "./utils/authchecker";
 import User from "./entities/user";
+import express from "express";
+import cors from "cors";
 
 dotenv.config();
 
 const main = async () => {
   const schema = await buildSchema({ resolvers, authChecker });
+
+  const app = express();
 
   const server = new ApolloServer({
     schema,
@@ -35,7 +39,17 @@ const main = async () => {
     },
   });
 
-  server.listen(process.env.PORT || 8000, () =>
+  app.use(
+    cors({
+      credentials: false,
+    })
+  );
+
+  await server.start();
+
+  server.applyMiddleware({ app });
+
+  app.listen(process.env.PORT || 8000, () =>
     console.log(`Server running: http://localhost:${process.env.PORT || 8000}`)
   );
 };
