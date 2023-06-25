@@ -5,7 +5,7 @@ import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const client = new ApolloClient({
-  uri: "http://localhost:8000/",
+  uri: "https://hostelaffairsiitm.com/api/",
   cache: new InMemoryCache(),
 });
 
