@@ -17,6 +17,22 @@
         height: fit-content;
         width: 40%;
 
+        &.mobile{
+            width: 100%;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            animation: overlayAnimate 0.3s linear;
+        }
+
+        @keyframes overlayAnimate {
+            0%{
+                transform: translateY(100%);
+            }
+            100%{
+                transform: translateY(0);
+            }
+        }
+
         .header{
             padding: 10px 20px;
             display: flex;

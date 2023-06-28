@@ -4,17 +4,18 @@ import { NavBar } from "../../components/Nav/NavBar";
 import { useState } from "react";
 import "./Complaint.scss";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export function Complaint() {
   const { state } = useLocation();
   const { token } = state;
 
+  const {device} = useSelector((state) => state.windowSize)
+
   const [filter, setFilter] = useState("All Complaints");
   const [sort, setSort] = useState("Date(newest first)");
 
   const { complaints, isPending, errors, user } = useFetch(filter, sort, token);
-
-  console.log("User: ", user);
 
   const useFilters = (value) => {
     setFilter(value);

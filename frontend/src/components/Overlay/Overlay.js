@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
 import './Overlay.scss'
 import close from "../../assets/close.svg"
+import { useSelector } from 'react-redux';
 
 function Overlay({title, closeFunction, children}) {
+
+    const {device} = useSelector((state) => state.windowSize)
 
     const clickOutside = (e) => {
         if(e.target.classList.contains("overlay-container")){            
@@ -21,7 +24,7 @@ function Overlay({title, closeFunction, children}) {
     
     return(
         <div className='overlay-container'>
-            <div className='overlay-box'>
+            <div className={`overlay-box ${device}`}>
                 <div className='header'>
                     <div className='title'>{title}</div>
                     <div className='close-btn-container'>

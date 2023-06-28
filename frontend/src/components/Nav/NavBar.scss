@@ -7,6 +7,11 @@
   justify-content: center;
   z-index: 2;
   height: 15vh;
+  
+  &.mobile{
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+  }
 
   .Nav {
     display: flex;
@@ -16,13 +21,27 @@
     margin-top: 15px;
     border-radius: $box-radius;
     background-color: rgb(221, 172, 166);
+
+    &.mobile{
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      margin-top: 0;
+      width: 100%;
+      align-items: center;
+      padding-bottom: 10px;
+    }
   
     .filters{
       display: flex;
       align-items: center;
+
+      &.mobile{
+        align-items: flex-start;
+        flex-direction: column;
+      }
     }
   
-    button {
+    .button {
       display: flex;
       align-items: center;
       padding: 10px;
@@ -33,6 +52,10 @@
       cursor: pointer;
       margin: 10px;
       background-color: rgb(218, 116, 116);
+
+      &.mobile{
+        height: fit-content;
+      }
     }
     button:hover {
       opacity: 0.8;

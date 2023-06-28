@@ -12,18 +12,31 @@
   .Create-Form {
     width: $form-width;
     text-align: center;
+
+    &.mobile{
+      width: 90%;
+    }
+
     label {
       text-align: left;
       display: $label_input_select-display;
     }
-    h2 {
-      font-size: $heading-size;
+    h1 {
+      font-size: xx-large;
       color: $form-color;
       margin-bottom: $bottom-margin;
     }
 
     .upload-images {
       text-align: left;
+    }
+
+    .upload-button{
+      background-color: white;
+      padding: 6px 10px;
+      margin: 15px 0;
+      border-radius: 5px;
+      border: 1px solid #ddd;
     }
 
     .image {

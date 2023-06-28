@@ -1,15 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import add_img from "../../assets/add-button.jpg";
 import "./NavBar.scss";
+import { useSelector } from "react-redux";
 
 export function NavBar({ buttons, token, userRole }) {
   const navigate = useNavigate();
-  console.log(userRole)
+  const {device} = useSelector((state) => state.windowSize)
 
   return (
-    <div className="nav-wrapper">
-      <nav className="Nav">
-        <div className="filters">
+    <div className={`nav-wrapper ${device}`}>
+      <nav className={`Nav ${device}`}>
+        <div className={`filters ${device}`}>
           {buttons.map((button) => (
             <div className="filters_sort" key={button.id}>
               {button.name + ":"}
@@ -25,7 +26,7 @@ export function NavBar({ buttons, token, userRole }) {
           ))}
         </div>
         {userRole === "COORD" ? null : 
-          <button onClick={() => {
+          <button className={`button ${device}`} onClick={() => {
             if(userRole === 'USER'){
               navigate("/create", { state: { token } })
             }else{

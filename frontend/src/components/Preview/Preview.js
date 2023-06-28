@@ -3,6 +3,7 @@ import { useAssign, useResolve } from "../../hooks/update";
 import "./Preview.scss";
 import Overlay from "../Overlay/Overlay";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export function Preview({ complaints, token, user }) {
   const [element, setElement] = useState("complaints");
@@ -14,6 +15,7 @@ export function Preview({ complaints, token, user }) {
 
   const navigate = useNavigate();
   const validRollno = new RegExp("^[a-zA-Z].[0-9].[a-zA-Z][0-9]..$");
+  const {device} = useSelector((state) => state.windowSize)
 
   const [assign] = useAssign({
     variables: {
@@ -90,8 +92,8 @@ export function Preview({ complaints, token, user }) {
   return (
     <div className="Preview">
       {complaints.map((complaint) => (
-        <div className="Complaint" key={complaint.id}>
-          <div className="Complaint-Img">
+        <div className={`Complaint ${device}`} key={complaint.id}>
+          <div className={`Complaint-Img ${device}`}>
             <div className="title">Complaint image: </div>
             <img
               className="Image"

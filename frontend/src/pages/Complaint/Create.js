@@ -3,10 +3,13 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useCreateComplaint } from "../../hooks/post";
 import Overlay from "../../components/Overlay/Overlay";
+import { useSelector } from "react-redux";
 
 export function Create() {
   const { state } = useLocation();
   const { token } = state;
+
+  const {device} = useSelector((state) => state.windowSize)
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -55,14 +58,15 @@ export function Create() {
 
   return (
     <div className="Create-Page">
-      <form className="Create-Form" onSubmit={onCreateComplaint}>
-        <h2>Enter your Complaint</h2>
+      <form className={`Create-Form ${device}`} onSubmit={onCreateComplaint}>
+        <h1>Enter your Complaint</h1>
         <label htmlFor="title">Title:</label>
         <input
           id="title"
           type="text"
           required
           value={title}
+          placeholder="Enter the title here"
           onChange={(e) => setTitle(e.target.value)}
         />
         <label htmlFor="descitption">Description:</label>
@@ -73,6 +77,7 @@ export function Create() {
           onChange={(e) => {
             setDescription(e.target.value);
           }}
+          placeholder="Enter the description here"
         />
         <label htmlFor="verticle">Verticle:</label>
 
@@ -82,12 +87,15 @@ export function Create() {
         </select>
 
         <div className="upload-images">Upload images (optional)</div>
+
+        <label htmlFor="uploadImage" className="upload-button">Click here to upload images</label>
         <input
           type="file"
           accept="image/*"
           onChange={(e) => openFile(e)}
           id="uploadImage"
           name="myPhoto"
+          style={{display: "none"}}
         />
         <img className="image" id="output" alt="" />
         <div className="btn-wrapper">
