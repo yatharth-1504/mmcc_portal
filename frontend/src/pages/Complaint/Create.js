@@ -14,7 +14,7 @@ export function Create() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [verticle, setVerticle] = useState("MMCC");
-  const [imageUrl, setImageUrl] = useState();
+  const [imageUrl, setImageUrl] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   const navigate = useNavigate();
@@ -42,6 +42,7 @@ export function Create() {
     setDescription("");
     setVerticle("");
     setSubmitted(true);
+    setImageUrl("")
   };
 
   var openFile = function (file) {
