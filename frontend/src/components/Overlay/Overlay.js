@@ -23,7 +23,7 @@ function Overlay({title, closeFunction, children}) {
 
     
     return(
-        <div className='overlay-container'>
+        <div className={`overlay-container  ${device}`}>
             <div className={`overlay-box ${device}`}>
                 <div className='header'>
                     <div className='title'>{title}</div>

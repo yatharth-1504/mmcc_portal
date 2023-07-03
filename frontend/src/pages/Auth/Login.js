@@ -7,10 +7,13 @@ import { useState } from "react";
 import CMGFS from '../../assets/cmgfs.png'
 import MMCC from '../../assets/mmcc.jpg'
 import plus from '../../assets/plus.svg'
+import { useSelector } from "react-redux";
 
 export function Login() {
   const [roll, setRoll] = useState();
   const [name, setName] = useState();
+
+  const { device } = useSelector((state) => state.windowSize)
 
   const navigate = useNavigate();
   const [login] = useLogin({
@@ -29,11 +32,11 @@ export function Login() {
 
   return (
     <div className="Login-Page">
-      <div className="login-content">
+      <div className={`login-content ${device}`}>
         <div className="logos">
-          <img src={CMGFS} alt="CMGFS" className="logo"/>
+          <img src={CMGFS} alt="CMGFS" className={`logo ${device}`}/>
           <img src={plus} alt="+" className="plus"/>
-          <img src={MMCC} alt="MMCC" className="logo"/>
+          <img src={MMCC} alt="MMCC" className={`logo ${device}`}/>
         </div>
         <div className="heading">Login With your SMAIL :)</div>
         <div className="LoginBtn">

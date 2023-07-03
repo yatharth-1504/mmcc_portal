@@ -4,6 +4,8 @@ import "./Preview.scss";
 import Overlay from "../Overlay/Overlay";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import MMCC from '../../assets/mmcc.jpg'
+import CMGFS from '../../assets/cmgfs.png'
 
 export function Preview({ complaints, token, user }) {
   const [element, setElement] = useState("complaints");
@@ -95,11 +97,23 @@ export function Preview({ complaints, token, user }) {
         <div className={`Complaint ${device}`} key={complaint.id}>
           <div className={`Complaint-Img ${device}`}>
             <div className="title">Complaint image: </div>
-            <img
-              className="Image"
-              src={complaint.images}
-              alt={complaint.title}
-            />
+            {complaint.images ? 
+              <img
+                className="Image"
+                src={complaint.images}
+                alt={complaint.title}
+              />: complaint.verticle === "MMCC" ? 
+              <img
+                className="Image logo"
+                src={MMCC}
+                alt="MMCC"
+              />:
+              <img
+                className="Image logo"
+                src={CMGFS}
+                alt="MMCC"
+              />
+            }
 
             {(complaint.proofImage || complaint.proofDesc) ? 
               <div className="title">Proof of Action: </div> : null

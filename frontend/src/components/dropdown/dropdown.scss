@@ -1,65 +1,67 @@
-// .dropdown{
-//     width: fit-content;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     justify-content: center;
-//     position: relative;
-    
-//     .placeholder{
-//         background-color: white;
-//         border-radius: 5px;
-//         padding: 4px 5px;
-//         margin: 0px 10px;
-//         font-weight: 500;
-//         cursor: pointer;
-//     }
-    
-//     .options{
-//         display: none;
-
-//         &.visible{
-//             background-color: white;
-//             position: relative;
-//             z-index: 20;
-//             display: flex;
-//             flex-direction: column;
-//         }
-
-//     }
-// }
-
-.dropdown-container{
-    text-align: left;
-    border: 1px solid #ccc;
+.dropdown{
+    color: black;
     position: relative;
-    border-radius: 5px;   
-}
-
-.dropdown-input {
-    padding: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    user-select: none;
-}
-
-.dropdown-menu{
-    position: absolute;
-    transform: translateY(4px);
+    margin-top: 20px;
     width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    overflow: auto;
-    max-height: 150px;
-    background-color: #fff;
-}
 
-.dropdown-item{
-    padding: 5px;
-    cursor: pointer;
-}
+    .title-container{
+        padding: 5px 10px;
+        background-color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 60%;
 
-.dropdown-item:hover{
-    background-color: #9fc3f870;
+        &.dark{
+            border: 1px solid black;
+        }
+
+        .title{
+            color: rgb(75, 75, 75);
+            width: 100%;
+        }
+
+        .down-arrow{
+            height: 18px;
+            transform: rotate(-90deg);
+            animation: arrowAnimate 0.5s alternate; 
+        }
+        @keyframes arrowAnimate {
+            0%{
+                transform: rotate(-90deg);
+            }
+            100%{
+                transform: rotate(0);
+            }
+        }
+    }
+
+    .menu{
+        background-color: white;
+        margin: 10px 0;
+        display: none;
+        position: absolute;
+        z-index: 2;
+        width: 100%;
+        border-radius: 5px;
+
+        &.dark{
+            border: 1px black solid;
+        }
+
+        &.active{
+            display: block;
+        }
+
+        .option-bar{
+            padding: 5px 10px;
+            cursor: pointer;
+
+            &:hover{
+                background-color: #225b72a5;
+            }
+        }
+    }
 }

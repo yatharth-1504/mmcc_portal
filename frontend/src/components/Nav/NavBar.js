@@ -30,7 +30,7 @@ export function NavBar({ buttons, token, userRole }) {
             if(userRole === 'USER'){
               navigate("/create", { state: { token } })
             }else{
-              // TODO: updateRoleFunction()
+              navigate("/updateRole", {state: { token, userRole }})
             }
           }}>
             <img className="img" src={add_img} alt="add-icon"></img>

@@ -1,9 +1,11 @@
+/* eslint-disable no-loop-func */
 import "./Create.scss";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useCreateComplaint } from "../../hooks/post";
 import Overlay from "../../components/Overlay/Overlay";
 import { useSelector } from "react-redux";
+import { upload } from "../../hooks/fileUpload";
 
 export function Create() {
   const { state } = useLocation();
@@ -14,7 +16,8 @@ export function Create() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [verticle, setVerticle] = useState("MMCC");
-  const [imageUrl, setImageUrl] = useState("");
+  const [files, setFiles] = useState([]);
+  const [imageUrls, setImageUrls] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   const navigate = useNavigate();
@@ -24,7 +27,7 @@ export function Create() {
         title: title,
         description: description,
         verticle: verticle,
-        images: [imageUrl],
+        images: [imageUrls],
       },
     },
     context: {
@@ -37,24 +40,33 @@ export function Create() {
 
   const onCreateComplaint = async (e) => {
     e.preventDefault();
+    // try{
+    //   upload("one", files[0])
+    // } catch(err){
+    //   console.log("Error: ", err)
+    // }
     await addComplaint();
     setTitle("");
     setDescription("");
     setVerticle("");
     setSubmitted(true);
-    setImageUrl("")
+    setFiles([])
+    setImageUrls("")
   };
 
-  var openFile = function (file) {
-    var input = file.target;
+  var openFile = function (e) {
+    var input = files.target;
     var reader = new FileReader();
     reader.onload = function () {
       var dataURL = reader.result;
+      console.log("Reader Result: ", reader.result)
       var output = document.getElementById("output");
       output.src = dataURL;
-      setImageUrl(dataURL);
+      setImageUrls(dataURL);
     };
     reader.readAsDataURL(input.files[0]);
+
+    // setFiles(e.target.files)
   };
 
   return (
@@ -89,16 +101,19 @@ export function Create() {
 
         <div className="upload-images">Upload images (optional)</div>
 
-        <label htmlFor="uploadImage" className="upload-button">Click here to upload images</label>
+        <label htmlFor="uploadImage" className="upload-button">Click here to upload files</label>
         <input
           type="file"
-          accept="image/*"
+          accept="image/*, video/*"
           onChange={(e) => openFile(e)}
           id="uploadImage"
           name="myPhoto"
+          multiple={true}
           style={{display: "none"}}
         />
-        <img className="image" id="output" alt="" />
+        {/* {imageUrls.map((imageUrl) => ( */}
+          {/* <img className="image" id="output" alt=""/> */}
+        {/* ))} */}
         <div className="btn-wrapper">
           <button className="submit-btn" type="submit">
             Submit

@@ -44,7 +44,8 @@ export function Complaint() {
     <div className="Complaints">
       {user ? (
         <div>
-          <NavBar buttons={buttons} token={token} userRole={user.role} />
+          {/*TODO: Change userRole to user.role instead of admin*/}
+          <NavBar buttons={buttons} token={token} userRole={"admin"} />
           <div className="complaints-wrapper">
             {isPending && <div className="Loading">Loading ...</div>}
             {errors && (

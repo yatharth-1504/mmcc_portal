@@ -1,82 +1,51 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState, useEffect} from 'react';
 import './dropdown.scss'
+// import downArrow from '../../assets/icons/downArrow.svg'
 
-function Dropdown ({placeholder, options, onChange}) {
-
-    // const [value, setValue] = useState(placeholder)
-    // const [visible, setVisible] = useState(false)
+const Dropdown = ({placeholder, options, onSelect, theme}) => {
 
     const [showMenu, setShowMenu] = useState(false)
-    const [selectedValue, SetSelectedValue] = useState(null)
+    const [selectedPlaceholder, setSelectedPlaceholder] = useState(placeholder)
+
+    console.log("Running", showMenu)
+    const clickOutside = (e) => {
+        // if(e.target.classList.contains("dropdown")){            
+        //     setShowMenu(false)          
+        // }
+        if(e.target.className !== "title"){
+            setShowMenu(false)
+        }
+    }
 
     useEffect(() => {
-
-        const handler = () => setShowMenu(false)
-
-        window.addEventListener("click", handler)
+        document.addEventListener('click', clickOutside)
 
         return () => {
-            window.removeEventListener("click", handler)
+            document.removeEventListener('click', clickOutside)
         }
-    })
-
-    const handleInputClick = (e) => {
-        e.stopPropagation()
-        setShowMenu(!showMenu)
-    }
-
-    const getDisplay = () => {
-        if(selectedValue) {
-            return selectedValue
-        }
-
-        return placeholder
-    }
-
-    const onItemClick = (option) => {
-        SetSelectedValue(option)
-    }
-
-    const isSelected = (option) => {
-        if(!selectedValue) {
-            return false
-        }
-
-        return selectedValue === option
-    }
-
+    }, [])
+    
     return (
-
-        <div className='dropdown-container'>
-            <div onClick={handleInputClick} className='dropdown-input'>
-                <div className='dropdown-selected-value'>{getDisplay()}</div>
+        <div className='dropdown'>
+            <div className={`title-container ${theme}`} onClick={()=>setShowMenu(true)}>
+                <div className={`title`}>{selectedPlaceholder}</div>
             </div>
-            {showMenu && (
-                <div className='dropdown-menu'>
-                    {options.map((option, id) => (
-                        <div
-                            onClick={()=>{onItemClick(option)}}
-                            key={id}
-                            className={`dropdown-item ${isSelected(option) && 'selected'}`}
-                        >
-                            {option}
-                        </div>
-                    ))}
-                </div>
-            )}
+            <div className={`menu ${showMenu ? "active" : ""} ${theme}`}>
+                {options.map((option, index) => (
+                    <div 
+                        key={index} 
+                        className='option-bar' 
+                        onClick={()=>{
+                            onSelect(option.value)
+                            setSelectedPlaceholder(option.value)
+                        }}
+                    >
+                        {option.icon ? <img alt='icon' src={option.icon}/> : null}
+                        <div>{option.value}</div>
+                    </div>
+                ))}
+            </div>
         </div>
-
-        // <div className='dropdown'>
-        //     <div className='placeholder' onClick={()=>{setVisible(!visible)}}>{value}</div>
-        //     <div className={`options ${visible ? "visible" : ""}`}>
-        //         {options.map(option => {
-        //             return (
-        //                 <div className='option' onClick={()=>{setValue(option)}}>{option}</div>
-        //             )
-        //         })}
-        //     </div>
-        // </div>
     )
 }
-
 export default Dropdown;

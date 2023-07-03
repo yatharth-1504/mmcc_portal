@@ -1,0 +1,93 @@
+@import "../../../index.scss";
+
+.Create-Page {
+  height: $page-hieght;
+  width: $page-width;
+  display: flex;
+  flex-direction: column;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  background-color: rgb(253, 249, 248);
+
+  .Create-Form {
+    width: $form-width;
+    text-align: center;
+
+    &.mobile{
+      width: 90%;
+    }
+
+    label {
+      text-align: left;
+      display: $label_input_select-display;
+    }
+    h1 {
+      font-size: xx-large;
+      color: $form-color;
+      margin-bottom: $bottom-margin;
+    }
+
+    .upload-images {
+      text-align: left;
+    }
+
+    .upload-button{
+      background-color: white;
+      padding: 6px 10px;
+      margin: 15px 0;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    .image {
+      height: 100px;
+      text-align: center;
+      margin: 10px 0;
+    }
+  }
+
+  input,
+  textarea,
+  select {
+    width: $input_select_width;
+    padding: $input_select_padding;
+    margin: 15px 0;
+    border: $input_select_border;
+    box-sizing: $input_select_box_sizing;
+    display: $label_input_select-display;
+    border-radius: 5px;
+    height: 40px;
+  }
+
+  textarea {
+    height: 75px;
+  }
+
+  .btn-wrapper {
+    width: 100%;
+    margin: 10px 0;
+
+    .submit-btn {
+      background: $form-color;
+      color: $button-color;
+      border: $button-border;
+      padding: $button-padding;
+      border-radius: $button-border-radius;
+      cursor: $button-cursor;
+      width: fit-content;
+    }
+  }
+
+  .submit-overlay {
+    .close-btn {
+      padding: 7px 12px;
+      margin: 10px 0;
+      background-color: green;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      width: fit-content;
+      align-self: flex-end;
+    }
+  }
+}
