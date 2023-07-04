@@ -16,8 +16,6 @@ dotenv.config();
 const main = async () => {
   const schema = await buildSchema({ resolvers, authChecker });
 
-  const app = express();
-
   const server = new ApolloServer({
     schema,
     context: async ({ req }: { req: any }) => {
@@ -39,15 +37,23 @@ const main = async () => {
     },
   });
 
+  await server.start();
+
+  const app = express();
+
   app.use(
     cors({
-      credentials: false,
+      credentials: true,
+      origin: [
+        "https://studio.apollographql.com",
+        "http://localhost:8000/graphql",
+        "http://localhost:3000",
+        "https://hostelaffairsiitm.com",
+      ],
     })
   );
 
-  await server.start();
-
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, cors: false });
 
   app.listen(process.env.PORT || 8000, () =>
     console.log(`Server running: http://localhost:${process.env.PORT || 8000}`)
