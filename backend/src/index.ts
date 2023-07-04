@@ -10,7 +10,6 @@ import authChecker from "./utils/authchecker";
 import User from "./entities/user";
 import express from "express";
 import cors from "cors";
-import { createServer } from "http";
 
 dotenv.config();
 
@@ -56,9 +55,7 @@ const main = async () => {
 
   server.applyMiddleware({ app, cors: false });
 
-  const httpServer = createServer(app);
-
-  httpServer.listen(process.env.PORT || 8000, () =>
+  app.listen(process.env.PORT || 8000, () =>
     console.log(`Server running: http://localhost:${process.env.PORT || 8000}`)
   );
 };
