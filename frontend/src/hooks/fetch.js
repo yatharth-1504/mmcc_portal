@@ -33,8 +33,8 @@ const FETCH_QUERY = `query GetComplaints($sortConditions: SortConditions!, $filt
 }
 `;
 
-// const url = "https://hostelaffairsiitm.com/api/graphql";
-const url = "http://localhost:8000/graphql"
+const url = "https://hostelaffairsiitm.com/api/graphql";
+// const url = "http://localhost:8000/graphql"
 
 export function useFetch(filter, sort, token) {
   const [complaints, setComplaints] = useState(null);

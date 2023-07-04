@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useCreateComplaint } from "../../hooks/post";
 import Overlay from "../../components/Overlay/Overlay";
 import { useSelector } from "react-redux";
-import { upload } from "../../hooks/fileUpload";
+// import { upload } from "../../hooks/fileUpload";
 
 export function Create() {
   const { state } = useLocation();

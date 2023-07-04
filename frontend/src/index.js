@@ -7,8 +7,8 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import store from "./redux/store";
 
 const client = new ApolloClient({
-  // uri: "https://hostelaffairsiitm.com/api/",
-  uri: "http://localhost:8000/graphql",
+  uri: "https://hostelaffairsiitm.com/api/",
+  // uri: "http://localhost:8000/graphql",
   cache: new InMemoryCache(),
 });
 
