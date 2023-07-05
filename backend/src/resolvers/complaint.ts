@@ -50,7 +50,7 @@ class ComplaintResolver {
       // sort condition
       let complaints = await Complaint.find({
         order: { createdAt: sort.createdAt == false ? "ASC" : "DESC" },
-        relations: ["user"],
+        relations: ["user", "assignedTo"],
       });
       // filters
       if (filters.search) {
