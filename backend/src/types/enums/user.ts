@@ -1,8 +1,8 @@
 export enum UserRole {
   ADMIN = "ADMIN",
-  SUPER_CORD = "SUPER_CORDINATOR",
+  SUPER_CORD = "SUPER_COORDINATOR",
   CORE = "CORE",
-  CORD = "CORDINATOR",
+  CORD = "COORDINATOR",
   USER = "USER",
   HAS = "HAS"
 }

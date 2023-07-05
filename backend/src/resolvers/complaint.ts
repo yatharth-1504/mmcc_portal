@@ -67,7 +67,8 @@ class ComplaintResolver {
       }
       if (filters.myComplaints) {
         complaints = complaints.filter(
-          (complaint) => complaint.user.id === user.id
+          (complaint) =>
+            complaint.user.id === user.id || complaint.assignedTo.id === user.id
         );
       }
       if (filters.verticle) {
@@ -89,15 +90,15 @@ class ComplaintResolver {
     UserRole.HAS,
   ])
   async assignComplaint(
-    @Ctx() { user }: MyContext,
+    // @Ctx() { user }: MyContext,
     @Arg("assignComplaint") assignComplaintInput: AssignComplaintInput
   ) {
     try {
       const _user = await User.findOneOrFail({
         where: { roll: assignComplaintInput.roll },
       });
-      if (!user.permission.assignComplaintsTo.includes(_user!.role))
-        throw new Error("UnAuthorised");
+      // if (!user.permission.assignComplaintsTo.includes(_user!.role))
+      //   throw new Error("UnAuthorised");
       const complaint = await Complaint.findOneOrFail({
         where: { id: assignComplaintInput.complaintId },
       });

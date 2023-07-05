@@ -30,3 +30,19 @@ export const useResolve = ({ variables, context }) => {
     context,
   }));
 };
+
+const UPDATE_ROLE_MUTATION = gql`
+  mutation UpdateUserRole($updateRole: UpdateRoleInput!) {
+    updateUserRole(updateRole: $updateRole) {
+      id
+    }
+  }
+`;
+
+export const useUpdateRole = ({ variables, context }) => {
+  let resolve;
+  return ([resolve] = useMutation(UPDATE_ROLE_MUTATION, {
+    variables,
+    context,
+  }));
+};

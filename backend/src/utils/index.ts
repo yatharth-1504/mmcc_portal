@@ -9,8 +9,8 @@ export const usersDevList = [
     role: "ADMIN",
   },
   {
-    roll: "CH20B010@smail.iitm.ac.in",
-    name: "Aman Kulwal",
+    roll: "ch20b010@smail.iitm.ac.in",
+    name: "Aman Kulwal",  
     pass: "123456",
     role: "ADMIN",
   },

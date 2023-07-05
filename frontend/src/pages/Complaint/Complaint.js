@@ -3,39 +3,43 @@ import { useFetch } from "../../hooks/fetch";
 import { NavBar } from "../../components/Nav/NavBar";
 import { useState } from "react";
 import "./Complaint.scss";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 export function Complaint() {
   const { state } = useLocation();
-  const { token } = state;
+  const { token, role } = state;
+  const { device } = useSelector((state) => state.windowSize);
 
-  const {device} = useSelector((state) => state.windowSize)
-
-  const [filter, setFilter] = useState("All Complaints");
+  const [filter, setFilter] = useState("");
   const [sort, setSort] = useState("Date(newest first)");
 
-  const { complaints, isPending, errors, user } = useFetch(filter, sort, token);
+  const { complaints, isPending, errors, user } = useFetch(
+    filter,
+    sort,
+    token,
+    role
+  );
 
   const useFilters = (value) => {
     setFilter(value);
   };
 
-  const useSort = () => {
-    setSort(sort);
+  const useSort = (value) => {
+    setSort(value);
   };
 
   const buttons = [
     {
       id: 1,
       name: "Filters",
-      conditions: ["All Complaints", "CMGFS", "MMCC"],
+      conditions: ["All", "CMGFS", "MMCC"],
       method: useFilters,
     },
     {
       id: 2,
       name: "Sort By",
-      conditions: ["Date(newest first)", "Date(oldest first)"],
+      conditions: ["None", "Date(newest first)", "Date(oldest first)"],
       method: useSort,
     },
   ];
@@ -45,7 +49,13 @@ export function Complaint() {
       {user ? (
         <div>
           {/*TODO: Change userRole to user.role instead of admin*/}
-          <NavBar buttons={buttons} token={token} userRole={"admin"} />
+          <NavBar
+            buttons={buttons}
+            token={token}
+            userRole={user.role}
+            verticle={user.verticle}
+            user={user}
+          />
           <div className="complaints-wrapper">
             {isPending && <div className="Loading">Loading ...</div>}
             {errors && (

@@ -11,12 +11,12 @@ export function Create() {
   const { state } = useLocation();
   const { token } = state;
 
-  const {device} = useSelector((state) => state.windowSize)
+  const { device } = useSelector((state) => state.windowSize);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [verticle, setVerticle] = useState("MMCC");
-  const [files, setFiles] = useState([]);
+  // const [files, setFiles] = useState([]);
   const [imageUrls, setImageUrls] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
@@ -50,16 +50,15 @@ export function Create() {
     setDescription("");
     setVerticle("");
     setSubmitted(true);
-    setFiles([])
-    setImageUrls("")
+    // setFiles([])
+    setImageUrls("");
   };
 
-  var openFile = function (e) {
-    var input = files.target;
+  var openFile = function (file) {
+    var input = file.target;
     var reader = new FileReader();
     reader.onload = function () {
       var dataURL = reader.result;
-      console.log("Reader Result: ", reader.result)
       var output = document.getElementById("output");
       output.src = dataURL;
       setImageUrls(dataURL);
@@ -101,18 +100,21 @@ export function Create() {
 
         <div className="upload-images">Upload images (optional)</div>
 
-        <label htmlFor="uploadImage" className="upload-button">Click here to upload files</label>
+        <label htmlFor="uploadImage" className="upload-button">
+          Click here to upload files
+        </label>
         <input
           type="file"
           accept="image/*, video/*"
           onChange={(e) => openFile(e)}
           id="uploadImage"
           name="myPhoto"
-          multiple={true}
-          style={{display: "none"}}
+          // multiple={true}
+          // style={{ display: "none" }}
         />
+        <img className="image" id="output" alt="" src="" />
         {/* {imageUrls.map((imageUrl) => ( */}
-          {/* <img className="image" id="output" alt=""/> */}
+        {/* <img className="image" id="output" alt=""/> */}
         {/* ))} */}
         <div className="btn-wrapper">
           <button className="submit-btn" type="submit">

@@ -5,7 +5,6 @@ import MyContext from "../utils/context";
 import {
   LoginInput,
   UpdateRoleInput,
-  // UpdateRoleInput
 } from "../types/inputs/user";
 import jwt from "jsonwebtoken";
 import { usersDevList } from "../utils";
@@ -19,14 +18,13 @@ class UserResolver {
       const user = await User.findOne({ where: { roll: roll } });
       let newUser;
       if (!user) {
-        if (usersDevList.filter((u) => u.roll === roll).length) {
+        if (usersDevList.filter((u) => u.roll === roll).length)
           newUser = await User.create({
             roll,
             name,
             role: UserRole.ADMIN,
           }).save();
-        }
-        newUser = await User.create({ roll, name }).save();
+        else newUser = await User.create({ roll, name }).save();
       }
       let token = jwt.sign(
         newUser ? newUser.id : user!.id,
@@ -75,20 +73,20 @@ class UserResolver {
     UserRole.HAS,
   ])
   async updateUserRole(
-    @Ctx() { user }: MyContext,
+    // @Ctx() { user }: MyContext,
     @Arg("updateRole") updateRoleInput: UpdateRoleInput
   ) {
     try {
-      if (!user.permission.updateRoleTo.includes(updateRoleInput.role))
-        throw new Error("Invalid Role");
+      // if (!user.permission.updateRoleTo.includes(updateRoleInput.role))
+      //   throw new Error("Invalid Role");
       const _user = await User.findOne({
         where: { roll: updateRoleInput.roll },
       });
-      if (!user.permission.updateRoleOf.includes(_user!.role))
-        throw new Error("UnAuthorised");
-      user.role = updateRoleInput.role;
-      user.verticle = updateRoleInput.verticle;
-      const userUpdated = await user.save();
+      // if (!user.permission.updateRoleOf.includes(_user!.role))
+      //   throw new Error("UnAuthorised");
+      _user!.role = updateRoleInput.role;
+      _user!.verticle = updateRoleInput.verticle;
+      const userUpdated = await _user!.save();
       return userUpdated;
     } catch (e) {
       throw new Error(e);

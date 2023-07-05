@@ -7,6 +7,9 @@ class LoginOutput {
 
   @Field((_type) => Boolean)
   status: boolean;
+
+  @Field()
+  role: string;
 }
 
 export default LoginOutput;

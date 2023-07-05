@@ -11,6 +11,7 @@ import Complaint from "./complaint";
 import { UserRole, Verticle } from "../types/enums/user";
 import Permission from "./permission";
 registerEnumType(UserRole, { name: "UserRole" });
+registerEnumType(Verticle, { name: "Verticle" });
 
 @Entity("User")
 @ObjectType("User")

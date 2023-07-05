@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useQuery, gql } from "@apollo/client";
 
-const filteringConditions = {
+let filteringConditions = {
   verticle: null,
   status: null,
   myComplaints: false,
@@ -29,20 +29,30 @@ const FETCH_QUERY = `query GetComplaints($sortConditions: SortConditions!, $filt
     name
     roll
     role
+    verticle
   }
 }
 `;
 
 const url = "https://hostelaffairsiitm.com/api/graphql";
-// const url = "http://localhost:8000/graphql"
+// const url = "http://localhost:8000/graphql";
 
-export function useFetch(filter, sort, token) {
+export function useFetch(filter, sort, token, role) {
   const [complaints, setComplaints] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [errors, setErrors] = useState(false);
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
 
-  console.log("Fetching complaints 🙂")
+  console.log("Fetching complaints 🙂");
+
+  if (filter === "All" || filter === "") {
+    filteringConditions = {
+      verticle: null,
+      status: null,
+      myComplaints: false,
+      search: null,
+    };
+  }
 
   if (filter === "MMCC") {
     filteringConditions.verticle = "MMCC";
@@ -55,6 +65,13 @@ export function useFetch(filter, sort, token) {
   if (sort === "Date(oldest first)") {
     sortConditions.createdAt = false;
   }
+
+  if (sort === "None" || sort === "Date(newest first)") {
+    sortConditions.createdAt = true;
+  }
+
+  filteringConditions.myComplaints =
+    role === "ADMIN" || role === "HAS" || role === "CORE" ? false : true;
 
   useEffect(() => {
     fetch(url, {
@@ -79,7 +96,7 @@ export function useFetch(filter, sort, token) {
         return response.json();
       })
       .then((res_data) => {
-        setUser(res_data.data.getMe)
+        setUser(res_data.data.getMe);
         setComplaints(res_data.data.getComplaints);
         setIsPending(false);
       })
