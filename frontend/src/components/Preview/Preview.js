@@ -9,9 +9,9 @@ import CMGFS from "../../assets/cmgfs.png";
 
 export function Preview({ complaints, token, user }) {
   const [element, setElement] = useState("complaints");
-  const [assignRoll, setAssignRoll] = useState();
-  const [complaintId, setComplaintId] = useState();
-  const [desc, setDesc] = useState();
+  const [assignRoll, setAssignRoll] = useState("");
+  const [complaintId, setComplaintId] = useState("");
+  const [desc, setDesc] = useState("");
   const [imageUrl, setImageUrl] = useState();
   const [status, setStatus] = useState("RESOLVED");
   const [rollErr, setRollErr] = useState(false);
