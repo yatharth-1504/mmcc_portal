@@ -48,7 +48,6 @@ export function Complaint() {
     <div className="Complaints">
       {user ? (
         <div>
-          {/*TODO: Change userRole to user.role instead of admin*/}
           <NavBar
             buttons={buttons}
             token={token}
@@ -66,7 +65,7 @@ export function Complaint() {
             {complaints?.length === 0 ? (
               <div className="no-complaints">
                 Have a Complaint ? Add it here
-                {/* <img src={require("../../assets//complaintsBG.png")} alt="bg" /> */}
+                <img src={require("../../assets//complaintsBG.png")} alt="bg" />
               </div>
             ) : null}
             {!!complaints && (

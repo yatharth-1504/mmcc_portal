@@ -33,7 +33,7 @@ class User extends BaseEntity {
   role: UserRole;
 
   @Column("enum", { nullable: true, enum: Verticle })
-  @Field()
+  @Field({ nullable: true })
   verticle: Verticle;
 
   @OneToMany(() => Complaint, (complaint) => complaint.user, {
@@ -50,7 +50,6 @@ class User extends BaseEntity {
   )
   complaintsAssigned: Complaint[];
 
-  
   @ManyToOne(() => Permission, (permission) => permission.users, {
     nullable: true,
   })
