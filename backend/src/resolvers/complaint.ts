@@ -53,6 +53,10 @@ class ComplaintResolver {
         relations: ["user", "assignedTo"],
       });
       // filters
+      if (user.role === UserRole.CORE)
+        complaints = complaints.filter(
+          (complaint) => complaint.verticle === user.verticle
+        );
       if (filters.search) {
         complaints = complaints.filter((complaint) =>
           JSON.stringify(complaint)
