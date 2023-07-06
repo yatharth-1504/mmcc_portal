@@ -10,8 +10,14 @@ export const usersDevList = [
   },
   {
     roll: "ch20b010@smail.iitm.ac.in",
-    name: "Aman Kulwal",  
+    name: "Aman Kulwal",
     pass: "123456",
     role: "ADMIN",
+  },
+  {
+    roll: "sec_hosaf@smail.iitm.ac.in",
+    name: "Hostel Affairs Secretary",
+    pass: "123456",
+    role: "HAS",
   },
 ];
