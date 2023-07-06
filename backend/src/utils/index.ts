@@ -14,10 +14,4 @@ export const usersDevList = [
     pass: "123456",
     role: "ADMIN",
   },
-  {
-    roll: "sec_hosaf@smail.iitm.ac.in",
-    name: "Hostel Affairs Secretary",
-    pass: "123456",
-    role: "HAS",
-  },
 ];
