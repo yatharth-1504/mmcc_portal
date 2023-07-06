@@ -70,8 +70,8 @@ export function useFetch(filter, sort, token, role) {
     sortConditions.createdAt = true;
   }
 
-  filteringConditions.myComplaints =
-    role === "ADMIN" || role === "HAS" || role === "CORE" ? false : true;
+  // filteringConditions.myComplaints =
+  //   role === "ADMIN" || role === "HAS" || role === "CORE" ? false : true;
 
   useEffect(() => {
     fetch(url, {
