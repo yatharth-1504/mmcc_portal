@@ -2,10 +2,7 @@ import User from "../entities/user";
 import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import LoginOutput from "../types/objects/user";
 import MyContext from "../utils/context";
-import {
-  LoginInput,
-  UpdateRoleInput,
-} from "../types/inputs/user";
+import { LoginInput, UpdateRoleInput } from "../types/inputs/user";
 import jwt from "jsonwebtoken";
 import { usersDevList } from "../utils";
 import { UserRole } from "../types/enums/user";
@@ -30,7 +27,11 @@ class UserResolver {
         newUser ? newUser.id : user!.id,
         process.env.JWT_SECRET!
       );
-      return { token: token, status: true };
+      return {
+        token: token,
+        status: true,
+        role: newUser ? newUser.role : user!.role,
+      };
     } catch (e) {
       throw new Error(`error : ${e}`);
     }

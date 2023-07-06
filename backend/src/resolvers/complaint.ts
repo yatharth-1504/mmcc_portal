@@ -72,7 +72,7 @@ class ComplaintResolver {
       if (filters.myComplaints) {
         complaints = complaints.filter(
           (complaint) =>
-            complaint.user.id === user.id || complaint.assignedTo.id === user.id
+            complaint.user?.id === user.id || complaint.assignedTo?.id === user.id
         );
       }
       if (filters.verticle) {
@@ -82,6 +82,7 @@ class ComplaintResolver {
       }
       return complaints;
     } catch (e) {
+      console.log(e);
       throw new Error(e);
     }
   }

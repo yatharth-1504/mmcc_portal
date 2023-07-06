@@ -4,20 +4,21 @@ import "./Preview.scss";
 import Overlay from "../Overlay/Overlay";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import MMCC from '../../assets/mmcc.jpg'
-import CMGFS from '../../assets/cmgfs.png'
+import MMCC from "../../assets/mmcc.jpg";
+import CMGFS from "../../assets/cmgfs.png";
 
 export function Preview({ complaints, token, user }) {
   const [element, setElement] = useState("complaints");
   const [assignRoll, setAssignRoll] = useState();
   const [complaintId, setComplaintId] = useState();
+  const [desc, setDesc] = useState();
   const [imageUrl, setImageUrl] = useState();
   const [status, setStatus] = useState("RESOLVED");
-  const [rollErr, setRollErr] = useState(false)
+  const [rollErr, setRollErr] = useState(false);
 
   const navigate = useNavigate();
   const validRollno = new RegExp("^[a-zA-Z].[0-9].[a-zA-Z][0-9]..$");
-  const {device} = useSelector((state) => state.windowSize)
+  const { device } = useSelector((state) => state.windowSize);
 
   const [assign] = useAssign({
     variables: {
@@ -38,7 +39,8 @@ export function Preview({ complaints, token, user }) {
     variables: {
       resolveComplaint: {
         complaintId: complaintId,
-        proof: imageUrl,
+        proofImage: [imageUrl],
+        proofDesc: desc,
         status: status,
       },
     },
@@ -53,17 +55,17 @@ export function Preview({ complaints, token, user }) {
   const onSuccessOverlayClose = () => {
     setElement("complaints");
     navigate("/complaints", { state: { token: token } });
-  } 
+  };
 
   const onAssign = async () => {
     if (validRollno.test(assignRoll)) {
       const assignOutput = await assign();
       console.log("AssignOutput: ", assignOutput);
       setAssignRoll(null);
-      setElement('assignSuccess')
+      setElement("assignSuccess");
     } else {
       console.log("Invalid Roll no");
-      setRollErr(true)
+      setRollErr(true);
     }
   };
 
@@ -75,7 +77,7 @@ export function Preview({ complaints, token, user }) {
       console.log("ResolveOutput: ", resolveOutput);
       setStatus("RESOLVED");
       setImageUrl(null);
-      setElement('actionSuccess')
+      setElement("actionSuccess");
     }
   };
 
@@ -97,40 +99,32 @@ export function Preview({ complaints, token, user }) {
         <div className={`Complaint ${device}`} key={complaint.id}>
           <div className={`Complaint-Img ${device}`}>
             <div className="title">Complaint image: </div>
-            {complaint.images ? 
+            {complaint.images ? (
               <img
                 className="Image"
                 src={complaint.images}
                 alt={complaint.title}
-              />: complaint.verticle === "MMCC" ? 
-              <img
-                className="Image logo"
-                src={MMCC}
-                alt="MMCC"
-              />:
-              <img
-                className="Image logo"
-                src={CMGFS}
-                alt="MMCC"
               />
-            }
+            ) : complaint.verticle === "MMCC" ? (
+              <img className="Image logo" src={MMCC} alt="MMCC" />
+            ) : (
+              <img className="Image logo" src={CMGFS} alt="MMCC" />
+            )}
 
-            {(complaint.proofImage || complaint.proofDesc) ? 
-              <div className="title">Proof of Action: </div> : null
-            }
-            {complaint.proofImage ? 
+            {complaint.proofImage || complaint.proofDesc ? (
+              <div className="title">Proof of Action: </div>
+            ) : null}
+            {complaint.proofImage ? (
               <img
                 className="Image"
-                src={complaint.proof}
+                src={complaint.proofImage}
                 alt="Proof of Resolution"
-              /> : null
-            }
+              />
+            ) : null}
 
-            {complaint.proofDesc ? 
-              <div className="proofDesc">
-                {complaint.proofDesc}
-              </div> : null
-            }
+            {complaint.proofDesc ? (
+              <div className="proofDesc">{complaint.proofDesc}</div>
+            ) : null}
           </div>
           <div className="Complaint-Text">
             <div className="complaint-header">
@@ -144,7 +138,7 @@ export function Preview({ complaints, token, user }) {
                 </div>
               </div>
 
-              {user.role === 'USER' ? null : 
+              {user.role === "USER" ? null : (
                 <div className="admin-side">
                   <div
                     className="assign button"
@@ -165,12 +159,13 @@ export function Preview({ complaints, token, user }) {
                     Take Action
                   </div>
                 </div>
-              }
+              )}
 
-              {(user.role === 'USER') ?
-                <div className={`status ${complaint.status}`}>{complaint.status}</div>
-              : null}
-
+              {user.role === "USER" ? (
+                <div className={`status ${complaint.status}`}>
+                  {complaint.status}
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -183,7 +178,7 @@ export function Preview({ complaints, token, user }) {
             setElement("complaints");
             setImageUrl(null);
             setStatus("RESOLVED");
-            setRollErr(false)
+            setRollErr(false);
           }}
           children={
             <div className="assign-overlay" id="assign-overlay">
@@ -192,12 +187,16 @@ export function Preview({ complaints, token, user }) {
                 placeholder="Enter the roll no you want to assign it to"
                 onChange={(e) => {
                   setAssignRoll(e.target.value);
-                  setRollErr(false)
+                  setRollErr(false);
                 }}
                 required
                 autoFocus={true}
               />
-              {rollErr ? <div className="error-msg">{"Please enter a valid roll number"}</div> : null}
+              {rollErr ? (
+                <div className="error-msg">
+                  {"Please enter a valid roll number"}
+                </div>
+              ) : null}
               <div className="btns">
                 <div
                   className="cancel-btn"
@@ -237,6 +236,7 @@ export function Preview({ complaints, token, user }) {
                   id="output"
                   alt=""
                 />
+                <textarea onChange={(e) => setDesc(e.target.value)} />
               </div>
               <select
                 className="select"
@@ -262,29 +262,33 @@ export function Preview({ complaints, token, user }) {
             </div>
           }
         />
-      ) : (element === 'assignSuccess') ? 
-          <Overlay
-            title={"Complaint assigned successfully"}
-            closeFunction={onSuccessOverlayClose}
-            children={
-              <div className="success-overlay">
-                <div className="success-msg">{`Complaint assigned successfully to ${assignRoll}`}</div>
-                <div className="button" onClick={onSuccessOverlayClose}>Close</div>
+      ) : element === "assignSuccess" ? (
+        <Overlay
+          title={"Complaint assigned successfully"}
+          closeFunction={onSuccessOverlayClose}
+          children={
+            <div className="success-overlay">
+              <div className="success-msg">{`Complaint assigned successfully to ${assignRoll}`}</div>
+              <div className="button" onClick={onSuccessOverlayClose}>
+                Close
               </div>
-            }
-          />
-      : (element === 'actionSuccess') ? 
-          <Overlay
-            title={"Action taken successfully"}
-            closeFunction={onSuccessOverlayClose}
-            children={
-              <div className="success-overlay">
-                <div className="success-msg">{`Complaint ${status} successfully`}</div>
-                <div className="button" onClick={onSuccessOverlayClose}>Close</div>
+            </div>
+          }
+        />
+      ) : element === "actionSuccess" ? (
+        <Overlay
+          title={"Action taken successfully"}
+          closeFunction={onSuccessOverlayClose}
+          children={
+            <div className="success-overlay">
+              <div className="success-msg">{`Complaint ${status} successfully`}</div>
+              <div className="button" onClick={onSuccessOverlayClose}>
+                Close
               </div>
-            }
-          />
-      :null}
+            </div>
+          }
+        />
+      ) : null}
     </div>
   );
 }

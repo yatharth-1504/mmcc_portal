@@ -24,6 +24,7 @@ const LOGIN_MUTATION = gql`
     login(login: $login) {
       token
       status
+      role
     }
   }
 `;

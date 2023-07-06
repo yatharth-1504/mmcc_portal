@@ -14,7 +14,7 @@
     font-size: 12px;
     border-radius: $box-radius;
 
-    &.mobile{
+    &.mobile {
       flex-direction: column;
       align-items: center;
     }
@@ -23,22 +23,22 @@
       padding: 10px;
       width: 20%;
 
-      &.mobile{
+      &.mobile {
         width: 80%;
       }
-      
+
       .Image {
         border: 2px rgb(77, 77, 76);
         width: 100%;
         border-radius: 5px;
         object-fit: contain;
 
-        &.logo{
+        &.logo {
           width: 75%;
         }
       }
 
-      .title{
+      .title {
         font-weight: bold;
         font-size: 16px;
         margin: 5px 0px;
@@ -52,49 +52,49 @@
       flex-direction: column;
       justify-content: space-between;
 
-      .complaint-header{
-        .title{
+      .complaint-header {
+        .title {
           font-weight: bold;
           font-size: 20px;
         }
-  
-        .desc{
+
+        .desc {
           font-size: 14px;
           padding: 10px 0;
         }
       }
 
-      .complaint-footer{
+      .complaint-footer {
         padding: 10px 0px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        
-        .time{
+
+        .time {
           font-size: 16px;
         }
 
-        .status{
+        .status {
           font-size: 16px;
           font-weight: bold;
           padding: 5px 10px;
           color: white;
           border-radius: 5px;
-          
-          &.POSTED{
+
+          &.POSTED {
             background-color: rgb(253, 153, 47);
           }
 
-          &.RESOLVED{
+          &.RESOLVED {
             background-color: rgb(45, 167, 45);
           }
 
-          &.REJECTED{
+          &.REJECTED {
             background-color: rgb(255, 69, 69);
           }
         }
 
-        .button{
+        .button {
           padding: 5px 10px;
           margin: 5px;
           background-color: rgb(221, 172, 166);
@@ -105,69 +105,69 @@
           font-size: 14px;
           text-align: center;
         }
-
       }
     }
   }
-  
-  .assign-overlay{
+
+  .assign-overlay {
     width: 100%;
 
-    .roll-input{
+    .roll-input {
       outline: none;
       border: 1px grey solid;
       padding: 10px;
       border-radius: 5px;
       width: 80%;
 
-      &.error{
+      &.error {
         border: 1px red solid;
 
-        &::placeholder{
+        &::placeholder {
           color: red;
         }
       }
     }
 
-    .error-msg{
+    .error-msg {
       color: red;
       margin: 7px 0;
       font-size: 12px;
     }
   }
 
-  .action-overlay{
+  .action-overlay {
     display: flex;
     flex-direction: column;
     width: 100%;
     justify-content: space-between;
 
-    .proof{
-      
-      .proofOfAction{
+    .proof {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .proofOfAction {
         width: 70%;
         margin: 12px 0;
       }
 
-      .image{
+      .image {
         height: 120px;
 
-        &.none{
+        &.none {
           display: none;
         }
       }
-
     }
 
-    .select{
+    .select {
       width: fit-content;
       margin: 10px 0;
     }
   }
 
-  .success-overlay{
-
-    .button{
+  .success-overlay {
+    .button {
       width: fit-content;
       padding: 5px 10px;
       margin: 5px 0;
@@ -181,10 +181,10 @@
     }
   }
 
-  .btns{
+  .btns {
     display: flex;
 
-    .assign-btn{
+    .assign-btn {
       padding: 7px 12px;
       background-color: rgb(218, 116, 116);
       color: white;
@@ -194,7 +194,7 @@
       cursor: pointer;
     }
 
-    .cancel-btn{
+    .cancel-btn {
       color: red;
       border: 1px red solid;
       padding: 7px 12px;

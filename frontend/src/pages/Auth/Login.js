@@ -30,7 +30,7 @@ export function Login() {
     navigate("/complaints", {
       state: {
         token: loginOutput.data.login.token,
-        role: loginOutput.data.login.token,
+        role: loginOutput.data.login.role,
       },
     });
   };
