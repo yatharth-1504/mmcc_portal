@@ -54,7 +54,8 @@ export function Preview({ complaints, token, user }) {
 
   const onSuccessOverlayClose = () => {
     setElement("complaints");
-    navigate("/complaints", { state: { token: token } });
+    navigate(0);
+    // navigate("/complaints", { state: { token: token } });
   };
 
   const onAssign = async () => {
@@ -186,7 +187,7 @@ export function Preview({ complaints, token, user }) {
                 className={`roll-input ${rollErr ? "error" : ""}`}
                 placeholder="Enter the roll no you want to assign it to"
                 onChange={(e) => {
-                  setAssignRoll(e.target.value);
+                  setAssignRoll(e.target.value.toLowerCase());
                   setRollErr(false);
                 }}
                 required

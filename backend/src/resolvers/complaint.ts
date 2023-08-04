@@ -72,7 +72,8 @@ class ComplaintResolver {
       if (filters.myComplaints) {
         complaints = complaints.filter(
           (complaint) =>
-            complaint.user?.id === user.id || complaint.assignedTo?.id === user.id
+            complaint.user?.id === user.id ||
+            complaint.assignedTo?.id === user.id
         );
       }
       if (filters.verticle) {
@@ -95,7 +96,7 @@ class ComplaintResolver {
     UserRole.HAS,
   ])
   async assignComplaint(
-    // @Ctx() { user }: MyContext,
+    @Ctx() { user }: MyContext,
     @Arg("assignComplaint") assignComplaintInput: AssignComplaintInput
   ) {
     try {
@@ -107,7 +108,11 @@ class ComplaintResolver {
       const complaint = await Complaint.findOneOrFail({
         where: { id: assignComplaintInput.complaintId },
       });
-      if (_user!.verticle !== complaint.verticle)
+      if (
+        user.role !== UserRole.ADMIN &&
+        user.role !== UserRole.HAS &&
+        _user!.verticle !== complaint.verticle
+      )
         throw new Error("Invalid Vertical");
       complaint.status = ComplaintStatus.ASSIGNED;
       complaint.assignedTo = _user;
@@ -135,7 +140,12 @@ class ComplaintResolver {
         resolveComplaintInput.complaintId,
         { relations: ["assignedTo"] }
       );
-      if (user.id !== complaint.assignedTo.id) throw new Error("UnAuthorised");
+      if (
+        user.role != UserRole.ADMIN &&
+        user.role != UserRole.HAS &&
+        user.id !== complaint.assignedTo?.id
+      )
+        throw new Error("UnAuthorised");
       complaint.status = resolveComplaintInput.status;
       let imageUrls = "";
       if (resolveComplaintInput.proofImage) {
