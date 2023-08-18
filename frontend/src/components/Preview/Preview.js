@@ -24,7 +24,7 @@ export function Preview({ complaints, token, user }) {
     variables: {
       assignComplaint: {
         complaintId: complaintId,
-        roll: assignRoll + "@smail.iitm.ac.in",
+        roll: assignRoll,
       },
     },
     context: {
@@ -59,15 +59,12 @@ export function Preview({ complaints, token, user }) {
   };
 
   const onAssign = async () => {
-    if (validRollno.test(assignRoll)) {
-      const assignOutput = await assign();
-      console.log("AssignOutput: ", assignOutput);
-      setAssignRoll(null);
-      setElement("assignSuccess");
-    } else {
-      console.log("Invalid Roll no");
-      setRollErr(true);
-    }
+    // if (validRollno.test(assignRoll)) {
+    const assignOutput = await assign();
+    setAssignRoll(null);
+    setElement("assignSuccess");
+    // } else {
+    // }
   };
 
   const onAction = async () => {
@@ -185,7 +182,7 @@ export function Preview({ complaints, token, user }) {
             <div className="assign-overlay" id="assign-overlay">
               <input
                 className={`roll-input ${rollErr ? "error" : ""}`}
-                placeholder="Enter the roll no you want to assign it to"
+                placeholder="Enter the Smail no you want to assign it to"
                 onChange={(e) => {
                   setAssignRoll(e.target.value.toLowerCase());
                   setRollErr(false);
